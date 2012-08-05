@@ -45,7 +45,7 @@ class Action : public QWidget
 		 *	@param parent Parent widget.
 		 */
 
-		explicit Action( QWidget* parent = 0 );
+		Action( QWidget* parent = 0 );
 
 
 

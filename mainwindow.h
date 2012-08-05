@@ -41,7 +41,7 @@ class MainWindow : public QMainWindow
 		 *	@param parent Parent widget.
 		 */
 
-		explicit MainWindow( QWidget* parent = 0 );
+		MainWindow( QWidget* parent = 0 );
 
 	private:
 

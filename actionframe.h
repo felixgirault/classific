@@ -45,7 +45,7 @@ class ActionFrame : public QFrame
 		 *	@param parent Parent widget
 		 */
 
-		explicit ActionFrame( const QString& name, Action* action, QWidget* parent = 0 );
+		ActionFrame( const QString& name, Action* action, QWidget* parent = 0 );
 		
 	private:
 

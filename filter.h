@@ -39,7 +39,7 @@ class Filter : public QWidget
 		 *	@param parent Parent widget.
 		 */
 
-		explicit Filter( QWidget* parent = 0 );
+		Filter( QWidget* parent = 0 );
 
 	private:
 

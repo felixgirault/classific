@@ -58,7 +58,11 @@ class Factory
 				 *	@param function Helper function to create the product.
 				 */
 
-				ProductMetaType( const QString& name, const QString& description, CreateFunction function ) :
+				ProductMetaType(
+					const QString& name,
+					const QString& description,
+					CreateFunction function
+				) :
 					__name( name ),
 					__description( description ),
 					__create( function )
@@ -121,8 +125,11 @@ class Factory
 		 *	@param function Helper function to create the product.
 		 */
 
-		static void registerProductMetaType( const QString& name, const QString& description, CreateFunction function )
-		{
+		static void registerProductMetaType(
+			const QString& name,
+			const QString& description,
+			CreateFunction function
+		) {
 			Factory& __this = instance( );
 			__this.__registry.append( ProductMetaType( name, description, function ));
 		}

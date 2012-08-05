@@ -45,7 +45,7 @@ class ActionCollection : public QFrame
 		 *	@param parent Parent widget.
 		 */
 
-		explicit ActionCollection( QWidget* parent = 0 );
+		ActionCollection( QWidget* parent = 0 );
 
 	public slots:
 

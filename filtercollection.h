@@ -45,7 +45,7 @@ class FilterCollection : public QFrame
 		 *	@param parent Parent widget.
 		 */
 
-		explicit FilterCollection( QWidget* parent = 0 );
+		FilterCollection( QWidget* parent = 0 );
 
 	public slots:
 
