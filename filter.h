@@ -26,7 +26,7 @@ class QLabel;
 
 
 /**
- *
+ *	Base class for a filter.
  */
 
 class Filter : public QFrame
@@ -34,6 +34,13 @@ class Filter : public QFrame
 	Q_OBJECT
 
 	public:
+
+		/**
+		 *	Constructs a filter with the given name.
+		 *
+		 *	@param name Name of the filter.
+		 *	@param parent Parent widget.
+		 */
 
 		explicit Filter( const QString& name, QWidget* parent = 0 );
 

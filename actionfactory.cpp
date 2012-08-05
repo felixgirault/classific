@@ -23,6 +23,6 @@
 
 ActionFactory::ActionFactory( )
 {
-	__factory.registerBuilder( QObject::tr( "Copy" ), new Builder< CopyAction >( ));
+	__factory.registerClass( QObject::tr( "Copy" ), new Builder< CopyAction >( ));
 }
 

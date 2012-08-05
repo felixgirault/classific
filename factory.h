@@ -24,7 +24,7 @@
 
 
 /**
- *
+ *	A singleton factory.
  */
 
 template< class Child, class Product >
@@ -33,19 +33,24 @@ class Factory
 	public:
 
 		/**
-		 *	Returns the name of all available products.
+		 *	Returns the name of all registered products.
+		 *
+		 *	@return Product names.
 		 */
 
-		static QStringList available( )
+		static QStringList names( )
 		{
 			Factory< Child, Product >* __this = instance( );
-			return __this->__factory.availableBuilders( );
+			return __this->__factory.names( );
 		}
 
 
 
 		/**
+		 *	Builds and returns a product.
 		 *
+		 *	@param name Name of the product to build.
+		 *	@return An instance of the product, or 0 if it couldn't be build.
 		 */
 
 		static Product* build( const QString& name )
@@ -57,7 +62,8 @@ class Factory
 	protected:
 
 		/**
-		 *	Constructor.
+		 *	Private constructor, to avoid multiple instances across the
+		 *	application.
 		 */
 
 		Factory( ) { }
@@ -65,7 +71,8 @@ class Factory
 
 
 		/**
-		 *	Copy constructor.
+		 *	Private copy constructor, to avoid multiple instances across the
+		 *	application.
 		 *
 		 *	@param factory Other factory.
 		 */
@@ -78,7 +85,8 @@ class Factory
 
 
 		/**
-		 *	Assignment operator.
+		 *	Private assignment operator, to avoid multiple instances across
+		 *	the application.
 		 *
 		 *	@param factory Other factory.
 		 */

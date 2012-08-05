@@ -16,22 +16,31 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QVBoxLayout>
+#include <QPushButton>
+
 #include "filtercollection.h"
 #include "filterfactory.h"
 
 
 
-FilterCollection::FilterCollection( QObject* parent ) :
-	QObject( parent )
+FilterCollection::FilterCollection( QWidget* parent ) :
+	QFrame( parent ),
+	__layout( new QVBoxLayout( this )),
+	__add( new QPushButton( this ))
 {
+	connect( __add, SIGNAL( clicked( )), this, SLOT( addFilter( )));
 
+	__layout->addWidget( __add );
+
+	setLayout( __layout );
 }
 
 
 
 void FilterCollection::addFilter( )
 {
-
+	QStringList filters = FilterFactory::names( );
 }
 
 

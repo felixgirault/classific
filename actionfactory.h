@@ -25,7 +25,7 @@
 
 
 /**
- *	ActionFactory.
+ *	A factory of actions.
  */
 
 class ActionFactory : public Factory< ActionFactory, Action >
@@ -35,7 +35,7 @@ class ActionFactory : public Factory< ActionFactory, Action >
 	protected:
 
 		/**
-		 *	Constructor.
+		 *	Registers actions.
 		 */
 
 		ActionFactory( );

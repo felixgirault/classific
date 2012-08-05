@@ -26,12 +26,18 @@
 
 
 /**
- *	AbstractBuilder.
+ *	Abstract instance builder.
  */
 
 class AbstractBuilder
 {
 	public:
+
+		/**
+		 *	Builds and returns a product.
+		 *
+		 *	@return An instance of the product.
+		 */
 
 		virtual void* build( ) = 0;
 
@@ -40,7 +46,7 @@ class AbstractBuilder
 
 
 /**
- *	Builder.
+ *	Instance builder to be used in a BasicFactory.
  */
 
 template < class Product >
@@ -49,7 +55,9 @@ class Builder : public AbstractBuilder
 	public:
 
 		/**
+		 *	Builds and returns a product.
 		 *
+		 *	@return An instance of the product.
 		 */
 
 		virtual void* build( )
@@ -62,7 +70,7 @@ class Builder : public AbstractBuilder
 
 
 /**
- *
+ *	A basic factory.
  */
 
 template< class Product >
@@ -71,7 +79,7 @@ class BasicFactory
 	public:
 
 		/**
-		 *	Destructor.
+		 *	Frees allocated memory.
 		 */
 
 		~BasicFactory< Product >( )
@@ -87,13 +95,13 @@ class BasicFactory
 
 
 		/**
+		 *	Registers a new product to be produced by the factory.
 		 *
-		 *
-		 *	@param key
-		 *	@param builder
+		 *	@param name Product name.
+		 *	@param builder Instance builder.
 		 */
 
-		void registerBuilder( const QString& name, AbstractBuilder* builder )
+		void registerProduct( const QString& name, AbstractBuilder* builder )
 		{
 			__builders.insert( name, builder );
 		}
@@ -101,11 +109,12 @@ class BasicFactory
 
 
 		/**
-		 *	@brief availableBuilders
-		 *	@return
+		 *	Returns the name of all registered products.
+		 *
+		 *	@return Product names.
 		 */
 
-		QStringList availableBuilders( )
+		QStringList names( )
 		{
 			return __builders.keys( );
 		}
@@ -113,10 +122,10 @@ class BasicFactory
 
 
 		/**
+		 *	Builds and returns a product.
 		 *
-		 *
-		 *	@param key
-		 *	@return
+		 *	@param name Name of the product to build.
+		 *	@return An instance of the product, or 0 if it couldn't be build.
 		 */
 
 		Product* build( const QString& name )
@@ -128,7 +137,7 @@ class BasicFactory
 
 	private:
 
-		QMap< QString, AbstractBuilder* > __builders;	//!<
+		QMap< QString, AbstractBuilder* > __builders;	//!< Registered builders.
 
 };
 

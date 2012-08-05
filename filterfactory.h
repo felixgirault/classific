@@ -25,7 +25,7 @@
 
 
 /**
- *	FilterFactory.
+ *	A factory of filters.
  */
 
 class FilterFactory : public Factory< FilterFactory, Filter >
@@ -35,7 +35,7 @@ class FilterFactory : public Factory< FilterFactory, Filter >
 	protected:
 
 		/**
-		 *	Constructor.
+		 *	Registers filters.
 		 */
 
 		FilterFactory( );

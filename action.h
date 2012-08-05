@@ -40,7 +40,10 @@ class Action : public QFrame
 	public:
 
 		/**
-		 *	Constructor
+		 *	Constructs an action with the given name.
+		 *
+		 *	@param name Name of the action.
+		 *	@param parent Parent widget.
 		 */
 
 		explicit Action( const QString& name, QWidget* parent = 0 );
@@ -48,7 +51,7 @@ class Action : public QFrame
 
 
 		/**
-		 *
+		 *	Executes the action.
 		 */
 
 		void run( );
@@ -56,10 +59,10 @@ class Action : public QFrame
 
 
 		/**
-		 *
+		 *	Explains what the action would do.
 		 */
 
-		void explain( );
+		void explain( ) const;
 
 	private:
 

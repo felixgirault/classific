@@ -37,6 +37,8 @@ class MainWindow : public QMainWindow
 
 		/**
 		 *	Constructor.
+		 *
+		 *	@param parent Parent widget.
 		 */
 
 		explicit MainWindow( QWidget* parent = 0 );

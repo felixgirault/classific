@@ -19,8 +19,11 @@
 #ifndef FILTERCOLLECTION_H
 #define FILTERCOLLECTION_H
 
-#include <QObject>
+#include <QFrame>
 #include <QVector>
+
+class QVBoxLayout;
+class QPushButton;
 
 class Filter;
 
@@ -30,22 +33,24 @@ class Filter;
  *	A collection of filters.
  */
 
-class FilterCollection : public QObject
+class FilterCollection : public QFrame
 {
 	Q_OBJECT
 
 	public:
 
 		/**
+		 *	Constructor.
 		 *
+		 *	@param parent Parent widget.
 		 */
 
-		explicit FilterCollection( QObject* parent = 0 );
+		explicit FilterCollection( QWidget* parent = 0 );
 
 	public slots:
 
 		/**
-		 *
+		 *	Asks for a filter to add.
 		 */
 
 		void addFilter( );
@@ -53,7 +58,7 @@ class FilterCollection : public QObject
 
 
 		/**
-		 *
+		 *	Remove the filter which triggered the slot.
 		 */
 
 		void removeFilter( );
@@ -61,6 +66,9 @@ class FilterCollection : public QObject
 	private:
 
 		QVector< Filter* > __filters;	//!<
+
+		QVBoxLayout* __layout;
+		QPushButton* __add;
 		
 };
 
