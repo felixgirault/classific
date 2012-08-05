@@ -17,11 +17,16 @@
  */
 
 #include "copyaction.h"
+#include "factory.h"
+
+
+
+REGISTER_PRODUCT( Action, CopyAction, "Copy", "Copies files." )
 
 
 
 CopyAction::CopyAction( QWidget* parent ) :
-	Action( tr( "Copy" ), parent )
+	Action( parent )
 {
 
 }

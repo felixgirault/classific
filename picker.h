@@ -16,27 +16,21 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COPYACTION_H
-#define COPYACTION_H
-
-#include "action.h"
+#ifndef PICKER_H
+#define PICKER_H
 
 
 
 /**
- *	CopyAction.
+ *	Picker.
  */
 
-class CopyAction : public Action
+class Picker
 {
 	public:
 
-		/**
-		 *	Constructor.
-		 */
-
-		CopyAction( QWidget* parent = 0 );
+		Picker( );
 
 };
 
-#endif // COPYACTION_H
+#endif // PICKER_H

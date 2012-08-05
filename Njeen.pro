@@ -17,18 +17,19 @@ SOURCES += main.cpp\
     action.cpp \
     filtercollection.cpp \
     copyaction.cpp \
-    actionfactory.cpp \
-    filterfactory.cpp \
-    filter.cpp
+    filter.cpp \
+    actionframe.cpp \
+    actioncollection.cpp \
+    picker.cpp
 
 HEADERS  += mainwindow.h \
     action.h \
     filtercollection.h \
-    actionfactory.h \
     copyaction.h \
-    basicfactory.h \
     factory.h \
-    filterfactory.h \
-    filter.h
+    filter.h \
+    actionframe.h \
+    actioncollection.h \
+    picker.h
 
-FORMS    += mainwindow.ui
+FORMS    +=

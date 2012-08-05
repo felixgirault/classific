@@ -19,13 +19,13 @@
 #ifndef ACTION_H
 #define ACTION_H
 
-#include <QFrame>
+#include <QWidget>
+
+#include "factory.h"
 
 class QLabel;
 class QProgressBar;
 class QPushButton;
-
-class FilterCollection;
 
 
 
@@ -33,20 +33,19 @@ class FilterCollection;
  *	Base class for an action.
  */
 
-class Action : public QFrame
+class Action : public QWidget
 {
 	Q_OBJECT
 
 	public:
 
 		/**
-		 *	Constructs an action with the given name.
+		 *	Constructs an action.
 		 *
-		 *	@param name Name of the action.
 		 *	@param parent Parent widget.
 		 */
 
-		explicit Action( const QString& name, QWidget* parent = 0 );
+		explicit Action( QWidget* parent = 0 );
 
 
 
@@ -66,11 +65,9 @@ class Action : public QFrame
 
 	private:
 
-		FilterCollection* __filters;	//!<
-
-		QLabel* __name;	//!<
+		QLabel* __name;			//!<
 		QProgressBar* __progress;	//!<
-		QPushButton* __remove;	//!<
+		QPushButton* __remove;		//!<
 		
 };
 

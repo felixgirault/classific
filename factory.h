@@ -19,101 +19,261 @@
 #ifndef FACTORY_H
 #define FACTORY_H
 
-#include "basicfactory.h"
+#include <QList>
+#include <QMap>
 
 
 
 /**
- *	A singleton factory.
+ *	A generic factory.
  */
 
-template< class Child, class Product >
+template< class ProductType >
 class Factory
 {
 	public:
 
+		typedef ProductType* ( *CreateFunction )( );
+
+	private:
+
+		class ProductMetaType
+		{
+			public:
+
+				/**
+				 *	Default constructor.
+				 */
+
+				ProductMetaType( )
+				{ }
+
+
+
+				/**
+				 *	Constructor.
+				 *
+				 *	@param name Name of the product.
+				 *	@param description Description of the product.
+				 *	@param function Helper function to create the product.
+				 */
+
+				ProductMetaType( const QString& name, const QString& description, CreateFunction function ) :
+					__name( name ),
+					__description( description ),
+					__create( function )
+				{ }
+
+
+
+				/**
+				 *	Returns the name of the product.
+				 *
+				 *	@return Product name.
+				 */
+
+				QString name( ) const
+				{
+					return __name;
+				}
+
+
+
+				/**
+				 *	Returns the description of the product.
+				 *
+				 *	@return Product description.
+				 */
+
+				QString description( ) const
+				{
+					return __description;
+				}
+
+
+
+				/**
+				 *	Returns an instance of a product.
+				 *
+				 *	@return Product instance.
+				 */
+
+				ProductType* create( )
+				{
+					return __create( );
+				}
+
+			private:
+
+				QString __name;		//!< Name of the product.
+				QString __description;	//!< Description of the product.
+				CreateFunction __create;	//!< Helper function which creates a product.
+
+		};
+
+	public:
+
 		/**
-		 *	Returns the name of all registered products.
+		 *	Registers a new product.
 		 *
-		 *	@return Product names.
+		 *	@param name Name of the product.
+		 *	@param description Description of the product.
+		 *	@param function Helper function to create the product.
 		 */
 
-		static QStringList names( )
+		static void registerProductMetaType( const QString& name, const QString& description, CreateFunction function )
 		{
-			Factory< Child, Product >* __this = instance( );
-			return __this->__factory.names( );
+			Factory& __this = instance( );
+			__this.__registry.append( ProductMetaType( name, description, function ));
 		}
 
 
 
 		/**
-		 *	Builds and returns a product.
+		 *	Returns a met of informations about all the registered types, in
+		 *	the form < name, description >.
 		 *
-		 *	@param name Name of the product to build.
-		 *	@return An instance of the product, or 0 if it couldn't be build.
+		 *	@return Map of informations.
 		 */
 
-		static Product* build( const QString& name )
+		static QMap< QString, QString > informations( )
 		{
-			Factory< Child, Product >* __this = instance( );
-			return __this->__factory.build( name );
-		}
+			Factory& __this = instance( );
+			QMap< QString, QString > informations;
 
-	protected:
+			foreach ( ProductMetaType meta, __this.__registry ) {
+				informations.insert( meta.name( ), meta.description( ));
+			}
 
-		/**
-		 *	Private constructor, to avoid multiple instances across the
-		 *	application.
-		 */
-
-		Factory( ) { }
-
-
-
-		/**
-		 *	Private copy constructor, to avoid multiple instances across the
-		 *	application.
-		 *
-		 *	@param factory Other factory.
-		 */
-
-		Factory( const Factory< Child, Product >& factory )
-		{
-			Q_UNUSED( factory );
+			return informations;
 		}
 
 
 
 		/**
-		 *	Private assignment operator, to avoid multiple instances across
-		 *	the application.
+		 *	Creates the product which is associated with the given name.
 		 *
-		 *	@param factory Other factory.
+		 *	@param name Name of the product.
+		 *	@return An instance of the product, or 0 if there is no product
+		 *		found with the given name.
 		 */
 
-		void operator=( const Factory< Child, Product >& factory )
+		static ProductType* create( const QString& name )
 		{
-			Q_UNUSED( factory );
+			Factory& __this = instance( );
+
+			foreach ( ProductMetaType meta, __this.__registry ) {
+				if ( name == meta.name( )) {
+					return meta.create( );
+				}
+			}
+
+			return 0;
+		}
+
+	private:
+
+		/**
+		 *	Private constructor to prevent copy.
+		 */
+
+		Factory( )
+		{ }
+
+
+
+		/**
+		 *	Private copy constructor to prevent copy.
+		 *
+		 *	@param other Other factory.
+		 */
+
+		Factory( const Factory& other )
+		{
+			Q_UNUSED( other );
 		}
 
 
 
 		/**
-		 *	Returns a singleton instance of the Factory.
+		 *	Private assignment operator to prevent copy.
 		 *
-		 *	@return Singleton instance.
+		 *	@param other Other factory.
 		 */
 
-		static Factory< Child, Product >* instance( )
+		void operator=( const Factory& other )
 		{
-			static Factory< Child, Product >* instance = new Child( );
-			return instance;
+			Q_UNUSED( other );
 		}
 
-	protected:
 
-		BasicFactory< Product > __factory;	//!< The basic factory.
+
+		/**
+		 *	Returns a unique instance of the Factory.
+		 *
+		 *	@return Unique instance.
+		 */
+
+		static Factory& instance( )
+		{
+			static Factory factory;
+			return factory;
+		}
+
+	private:
+
+		QList< ProductMetaType > __registry;	//!< Regitry of products meta.
 
 };
+
+
+
+/**
+ *	An utility class to register products for the factory.
+ */
+
+template< class AncestorType, class ProductType >
+class ProductTypeRegistrar
+{
+	public:
+
+		/**
+		 *	Constructor.
+		 *
+		 *	@param name Name of the product.
+		 *	@param description Description of the product.
+		 */
+
+		ProductTypeRegistrar( const QString& name, const QString& description )
+		{
+			Factory< AncestorType >::registerProductMetaType( name, description, create );
+		}
+
+
+
+		/**
+		 *	Returns an instance of the product.
+		 *
+		 *	@return Product instance.
+		 */
+
+		static AncestorType* create( )
+		{
+			return new ProductType;
+		}
+
+};
+
+
+
+/**
+ *	A macro to register products easily.
+ */
+
+#define REGISTER_PRODUCT( baseClassName, className, name, description ) \
+	ProductTypeRegistrar< baseClassName, className > className##Product( \
+		QObject::tr( name ), \
+		QObject::tr( description ) \
+	);
 
 #endif // FACTORY_H

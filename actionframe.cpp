@@ -16,13 +16,16 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "actionfactory.h"
-#include "copyaction.h"
+#include <QLabel>
+
+#include "actionframe.h"
 
 
 
-ActionFactory::ActionFactory( )
+ActionFrame::ActionFrame( const QString& name, Action* action, QWidget *parent ) :
+	QFrame( parent ),
+	__action( action ),
+	__name( new QLabel( name, this ))
 {
-	__factory.registerClass( QObject::tr( "Copy" ), new Builder< CopyAction >( ));
-}
 
+}

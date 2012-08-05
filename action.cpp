@@ -24,10 +24,8 @@
 
 
 
-Action::Action( const QString &name, QWidget* parent ) :
-	QFrame( parent ),
-	__name( new QLabel( name, this )),
-	__progress( new QProgressBar( this ))
+Action::Action( QWidget* parent ) :
+	QWidget( parent )
 {
-	__name->setParent( __progress );
+
 }

@@ -16,15 +16,12 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QLabel>
-
 #include "filter.h"
 
 
 
-Filter::Filter( const QString& name, QWidget* parent ) :
-	QFrame( parent ),
-	__name( new QLabel( name, this ))
+Filter::Filter( QWidget* parent ) :
+	QWidget( parent )
 {
 
 }

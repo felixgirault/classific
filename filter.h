@@ -19,9 +19,7 @@
 #ifndef FILTER_H
 #define FILTER_H
 
-#include <QFrame>
-
-class QLabel;
+#include <QWidget>
 
 
 
@@ -29,7 +27,7 @@ class QLabel;
  *	Base class for a filter.
  */
 
-class Filter : public QFrame
+class Filter : public QWidget
 {
 	Q_OBJECT
 
@@ -38,15 +36,14 @@ class Filter : public QFrame
 		/**
 		 *	Constructs a filter with the given name.
 		 *
-		 *	@param name Name of the filter.
 		 *	@param parent Parent widget.
 		 */
 
-		explicit Filter( const QString& name, QWidget* parent = 0 );
+		explicit Filter( QWidget* parent = 0 );
 
 	private:
 
-		QLabel* __name;	//!<
+
 
 };
 

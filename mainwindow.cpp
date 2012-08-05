@@ -16,13 +16,17 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QVBoxLayout>
+
 #include "mainwindow.h"
+#include "actioncollection.h"
 
 
 
 MainWindow::MainWindow( QWidget* parent ) :
-	QMainWindow( parent )
+	QMainWindow( parent ),
+	__actions( new ActionCollection( this ))
 {
-	__ui.setupUi( this );
+	setCentralWidget( __actions );
 }
 

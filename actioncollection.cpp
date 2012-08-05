@@ -16,11 +16,36 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "filterfactory.h"
+#include <QVBoxLayout>
+#include <QPushButton>
+
+#include "actioncollection.h"
+#include "factory.h"
 
 
 
-FilterFactory::FilterFactory( )
+ActionCollection::ActionCollection( QWidget* parent ) :
+	QFrame( parent ),
+	__layout( new QVBoxLayout( this )),
+	__add( new QPushButton( tr( "Add" ), this ))
+{
+	connect( __add, SIGNAL( clicked( )), this, SLOT( addAction( )));
+
+	__layout->addWidget( __add );
+
+	setLayout( __layout );
+}
+
+
+
+void ActionCollection::addAction( )
+{
+	QMap< QString, QString > informations = Factory< Action >::informations( );
+}
+
+
+
+void ActionCollection::removeAction( )
 {
 
 }

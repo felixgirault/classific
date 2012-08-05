@@ -21,7 +21,7 @@
 
 #include <QMainWindow>
 
-#include "ui_mainwindow.h"
+class ActionCollection;
 
 
 
@@ -45,7 +45,7 @@ class MainWindow : public QMainWindow
 
 	private:
 
-		Ui::MainWindow __ui;	//!< interface
+		ActionCollection* __actions;
 
 };
 

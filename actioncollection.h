@@ -16,27 +16,60 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COPYACTION_H
-#define COPYACTION_H
+#ifndef ACTIONCOLLECTION_H
+#define ACTIONCOLLECTION_H
 
-#include "action.h"
+#include <QFrame>
+#include <QVector>
+
+class QVBoxLayout;
+class QPushButton;
+
+class Action;
 
 
 
 /**
- *	CopyAction.
+ *	A collection of actions.
  */
 
-class CopyAction : public Action
+class ActionCollection : public QFrame
 {
+	Q_OBJECT
+
 	public:
 
 		/**
 		 *	Constructor.
+		 *
+		 *	@param parent Parent widget.
 		 */
 
-		CopyAction( QWidget* parent = 0 );
+		explicit ActionCollection( QWidget* parent = 0 );
+
+	public slots:
+
+		/**
+		 *	Asks for an action to add.
+		 */
+
+		void addAction( );
+
+
+
+		/**
+		 *	Remove the action which triggered the slot.
+		 */
+
+		void removeAction( );
+
+	private:
+
+		QVector< Action* > __actions;	//!<
+
+		QVBoxLayout* __layout;
+		QPushButton* __add;
 
 };
 
-#endif // COPYACTION_H
+#endif // ACTIONCOLLECTION_H

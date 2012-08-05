@@ -20,14 +20,14 @@
 #include <QPushButton>
 
 #include "filtercollection.h"
-#include "filterfactory.h"
+#include "factory.h"
 
 
 
 FilterCollection::FilterCollection( QWidget* parent ) :
 	QFrame( parent ),
 	__layout( new QVBoxLayout( this )),
-	__add( new QPushButton( this ))
+	__add( new QPushButton( tr( "Add" ), this ))
 {
 	connect( __add, SIGNAL( clicked( )), this, SLOT( addFilter( )));
 
@@ -40,7 +40,7 @@ FilterCollection::FilterCollection( QWidget* parent ) :
 
 void FilterCollection::addFilter( )
 {
-	QStringList filters = FilterFactory::names( );
+	Factory< Filter >::informations( );
 }
 
 

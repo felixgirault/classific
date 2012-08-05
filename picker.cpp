@@ -16,30 +16,11 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ACTIONFACTORY_H
-#define ACTIONFACTORY_H
-
-#include "factory.h"
-#include "action.h"
+#include "picker.h"
 
 
 
-/**
- *	A factory of actions.
- */
-
-class ActionFactory : public Factory< ActionFactory, Action >
+Picker::Picker( )
 {
-	friend class Factory< ActionFactory, Action >;
 
-	protected:
-
-		/**
-		 *	Registers actions.
-		 */
-
-		ActionFactory( );
-
-};
-
-#endif // ACTIONFACTORY_H
+}

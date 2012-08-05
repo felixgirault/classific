@@ -16,30 +16,44 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FILTERFACTORY_H
-#define FILTERFACTORY_H
+#ifndef ACTIONFRAME_H
+#define ACTIONFRAME_H
 
-#include "factory.h"
-#include "filter.h"
+#include <QFrame>
+
+class QLabel;
+
+class Action;
+class FilterCollection;
 
 
 
 /**
- *	A factory of filters.
+ *	An interface wrapper for actions.
  */
 
-class FilterFactory : public Factory< FilterFactory, Filter >
+class ActionFrame : public QFrame
 {
-	friend class Factory< FilterFactory, Filter >;
+	Q_OBJECT
 
-	protected:
+	public:
 
 		/**
-		 *	Registers filters.
+		 *	Constructor.
+		 *
+		 *	@param action
+		 *	@param parent Parent widget
 		 */
 
-		FilterFactory( );
+		explicit ActionFrame( const QString& name, Action* action, QWidget* parent = 0 );
+		
+	private:
 
+		Action* __action;			//!< Action.
+		FilterCollection* __filters;	//!< Collection of filters.
+
+		QLabel* __name;	//!< Name label.
+		
 };
 
-#endif // FILTERFACTORY_H
+#endif // ACTIONFRAME_H
