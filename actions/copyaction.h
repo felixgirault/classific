@@ -16,54 +16,29 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ACTIONFRAME_H
-#define ACTIONFRAME_H
+#ifndef COPYACTION_H
+#define COPYACTION_H
 
-#include <QFrame>
-
-class QLabel;
-class TypedPushButton;
-
-class Action;
-class FilterCollection;
+#include "../action.h"
 
 
 
 /**
- *	An interface wrapper for actions.
+ *	Copies files.
  */
 
-class ActionFrame : public QFrame
+class CopyAction : public Action
 {
-	Q_OBJECT
-
 	public:
 
 		/**
 		 *	Constructor.
 		 *
-		 *	@param action
-		 *	@param parent Parent widget
+		 *	@param parent Parent widget.
 		 */
 
-		ActionFrame( const QString& name, Action* action, QWidget* parent = 0 );
+		CopyAction( QWidget* parent = 0 );
 
-	signals:
-
-		/**
-		 *
-		 */
-
-		void removeMe( );
-		
-	private:
-
-		Action* __action;			//!< Action.
-		FilterCollection* __filters;	//!< Collection of filters.
-
-		QLabel* __name;			//!< Name label.
-		TypedPushButton* __remove;		//!< A button to close the frame.
-		
 };
 
-#endif // ACTIONFRAME_H
+#endif // COPYACTION_H

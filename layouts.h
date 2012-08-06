@@ -16,54 +16,50 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ACTIONFRAME_H
-#define ACTIONFRAME_H
+#ifndef LAYOUTS_H
+#define LAYOUTS_H
 
-#include <QFrame>
-
-class QLabel;
-class TypedPushButton;
-
-class Action;
-class FilterCollection;
+#include <QHBoxLayout>
+#include <QVBoxLayout>
 
 
 
 /**
- *	An interface wrapper for actions.
+ *
  */
 
-class ActionFrame : public QFrame
+class HBoxLayout : public QHBoxLayout
 {
-	Q_OBJECT
-
 	public:
 
 		/**
 		 *	Constructor.
 		 *
-		 *	@param action
-		 *	@param parent Parent widget
+		 *	@param parent Parent widget.
 		 */
 
-		ActionFrame( const QString& name, Action* action, QWidget* parent = 0 );
+		HBoxLayout( QWidget* parent = 0 );
 
-	signals:
-
-		/**
-		 *
-		 */
-
-		void removeMe( );
-		
-	private:
-
-		Action* __action;			//!< Action.
-		FilterCollection* __filters;	//!< Collection of filters.
-
-		QLabel* __name;			//!< Name label.
-		TypedPushButton* __remove;		//!< A button to close the frame.
-		
 };
 
-#endif // ACTIONFRAME_H
+
+
+/**
+ *
+ */
+
+class VBoxLayout : public QVBoxLayout
+{
+	public:
+
+		/**
+		 *	Constructor.
+		 *
+		 *	@param parent Parent widget.
+		 */
+
+		VBoxLayout( QWidget* parent = 0 );
+
+};
+
+#endif // LAYOUTS_H

@@ -102,7 +102,7 @@ class Factory
 				 *	@return Product instance.
 				 */
 
-				ProductType* create( )
+				ProductType* create( ) const
 				{
 					return __create( );
 				}

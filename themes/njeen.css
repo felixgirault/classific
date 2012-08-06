@@ -1,0 +1,45 @@
+QMainWindow {
+	background-color: #222;
+}
+
+ActionCollection {
+	margin: 20px;
+}
+
+ActionFrame {
+	margin-bottom: 20px;
+	background-color: #fff;
+}
+
+FilterCollection {
+	margin-top: 20px;
+	background-color: #eee;
+}
+
+FilterFrame {
+	margin-bottom: 20px;
+	border-top: 1px solid #ddd;
+}
+
+TypedPushButton {
+	border: none;
+	padding: 0 5px;
+}
+
+/* negative button */
+TypedPushButton[type="0"] {
+	background-color: #c02;
+	color: #fff;
+}
+
+/* neutral button */
+TypedPushButton[type="1"] {
+	background-color: #888;
+	color: #fff;
+}
+
+/* positive button */
+TypedPushButton[type="2"] {
+	background-color: #8c0;
+	color: #fff;
+}

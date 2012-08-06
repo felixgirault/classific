@@ -22,10 +22,9 @@
 #include <QFrame>
 #include <QVector>
 
-class QVBoxLayout;
-class QPushButton;
-
 class Action;
+class VBoxLayout;
+class TypedPushButton;
 
 
 
@@ -47,7 +46,15 @@ class ActionCollection : public QFrame
 
 		ActionCollection( QWidget* parent = 0 );
 
-	public slots:
+	private:
+
+		/**
+		 *	Adds an action frame to the collection.
+		 */
+
+		void addFrame( const QString& name, Action* action );
+
+	private slots:
 
 		/**
 		 *	Asks for an action to add.
@@ -58,17 +65,17 @@ class ActionCollection : public QFrame
 
 
 		/**
-		 *	Remove the action which triggered the slot.
+		 *	Remove the action frame which triggered the slot.
 		 */
 
-		void removeAction( );
+		void removeFrame( );
 
 	private:
 
 		QVector< Action* > __actions;	//!<
 
-		QVBoxLayout* __layout;
-		QPushButton* __add;
+		VBoxLayout* __layout;
+		TypedPushButton* __add;
 
 };
 

@@ -16,24 +16,23 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef ACTIONFRAME_H
-#define ACTIONFRAME_H
+#ifndef FILTERFRAME_H
+#define FILTERFRAME_H
 
 #include <QFrame>
 
 class QLabel;
 class TypedPushButton;
 
-class Action;
-class FilterCollection;
+class Filter;
 
 
 
 /**
- *	An interface wrapper for actions.
+ *	An interface wrapper for filters.
  */
 
-class ActionFrame : public QFrame
+class FilterFrame : public QFrame
 {
 	Q_OBJECT
 
@@ -42,11 +41,11 @@ class ActionFrame : public QFrame
 		/**
 		 *	Constructor.
 		 *
-		 *	@param action
+		 *	@param filter
 		 *	@param parent Parent widget
 		 */
 
-		ActionFrame( const QString& name, Action* action, QWidget* parent = 0 );
+		FilterFrame( const QString& name, Filter* filter, QWidget* parent = 0 );
 
 	signals:
 
@@ -55,15 +54,14 @@ class ActionFrame : public QFrame
 		 */
 
 		void removeMe( );
-		
+
 	private:
 
-		Action* __action;			//!< Action.
-		FilterCollection* __filters;	//!< Collection of filters.
+		Filter* __filter;			//!< Filter.
 
 		QLabel* __name;			//!< Name label.
-		TypedPushButton* __remove;		//!< A button to close the frame.
-		
+		TypedPushButton* __remove;	//!< A button to close the frame.
+
 };
 
-#endif // ACTIONFRAME_H
+#endif // FILTERFRAME_H

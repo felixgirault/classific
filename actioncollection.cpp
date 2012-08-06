@@ -16,18 +16,23 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QVBoxLayout>
-#include <QPushButton>
-
 #include "actioncollection.h"
+#include "actionframe.h"
 #include "factory.h"
+#include "typedpushbutton.h"
+#include "layouts.h"
+#include "picker.h"
 
 
+
+/**
+ *
+ */
 
 ActionCollection::ActionCollection( QWidget* parent ) :
 	QFrame( parent ),
-	__layout( new QVBoxLayout( this )),
-	__add( new QPushButton( tr( "Add" ), this ))
+	__layout( new VBoxLayout( this )),
+	__add( new TypedPushButton( tr( "Add action" ), TypedPushButton::Positive, this ))
 {
 	connect( __add, SIGNAL( clicked( )), this, SLOT( addAction( )));
 
@@ -38,14 +43,52 @@ ActionCollection::ActionCollection( QWidget* parent ) :
 
 
 
-void ActionCollection::addAction( )
+/**
+ *
+ */
+
+void ActionCollection::addFrame( const QString& name, Action* action )
 {
-	QMap< QString, QString > informations = Factory< Action >::informations( );
+	ActionFrame* frame = new ActionFrame( name, action );
+	connect( frame, SIGNAL( removeMe( )), this, SLOT( removeFrame( )));
+
+	__layout->insertWidget( __layout->count( ) - 1, frame );
 }
 
 
 
-void ActionCollection::removeAction( )
-{
+/**
+ *
+ */
 
+void ActionCollection::addAction( )
+{
+	QMap< QString, QString > informations = Factory< Action >::informations( );
+
+	Picker picker( informations, this );
+	if ( picker.exec( ) == QDialog::Rejected ) {
+		return;
+	}
+
+	Action* action = Factory< Action >::create( picker.selected( ));
+	if ( action ) {
+		addFrame( picker.selected( ), action );
+	}
+}
+
+
+
+/**
+ *
+ */
+
+void ActionCollection::removeFrame( )
+{
+	ActionFrame* frame = qobject_cast< ActionFrame* >( sender( ));
+	if ( !frame ) {
+		return;
+	}
+
+	layout( )->removeWidget( frame );
+	frame->deleteLater( );
 }

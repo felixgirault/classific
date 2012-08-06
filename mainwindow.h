@@ -43,6 +43,23 @@ class MainWindow : public QMainWindow
 
 		MainWindow( QWidget* parent = 0 );
 
+	protected:
+
+		/**
+		 *
+		 *	@param event
+		 */
+
+		void keyPressEvent( QKeyEvent* event );
+
+	private:
+
+		/**
+		 *
+		 */
+
+		void loadTheme( );
+
 	private:
 
 		ActionCollection* __actions;

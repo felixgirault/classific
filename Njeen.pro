@@ -13,23 +13,31 @@ TEMPLATE = app
 
 
 SOURCES += main.cpp\
-        mainwindow.cpp \
+    mainwindow.cpp \
     action.cpp \
     filtercollection.cpp \
-    copyaction.cpp \
     filter.cpp \
     actionframe.cpp \
     actioncollection.cpp \
-    picker.cpp
+    picker.cpp \
+    typedpushbutton.cpp \
+    layouts.cpp \
+    filters/namefilter.cpp \
+    actions/copyaction.cpp \
+    filterframe.cpp
 
 HEADERS  += mainwindow.h \
     action.h \
     filtercollection.h \
-    copyaction.h \
     factory.h \
     filter.h \
     actionframe.h \
     actioncollection.h \
-    picker.h
+    picker.h \
+    typedpushbutton.h \
+    layouts.h \
+    filters/namefilter.h \
+    actions/copyaction.h \
+    filterframe.h
 
-FORMS    +=
+OTHER_FILES += themes/njeen.css

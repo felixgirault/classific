@@ -16,27 +16,32 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef COPYACTION_H
-#define COPYACTION_H
+#include <QMargins>
 
-#include "action.h"
+#include "layouts.h"
 
 
 
 /**
- *	CopyAction.
+ *
  */
 
-class CopyAction : public Action
+HBoxLayout::HBoxLayout( QWidget* parent ) :
+	QHBoxLayout( parent )
 {
-	public:
+	setContentsMargins( QMargins( ));
+	setSpacing( 0 );
+}
 
-		/**
-		 *	Constructor.
-		 */
 
-		CopyAction( QWidget* parent = 0 );
 
-};
+/**
+ *
+ */
 
-#endif // COPYACTION_H
+VBoxLayout::VBoxLayout( QWidget* parent ) :
+	QVBoxLayout( parent )
+{
+	setContentsMargins( QMargins( ));
+	setSpacing( 0 );
+}

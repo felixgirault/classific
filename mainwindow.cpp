@@ -16,17 +16,59 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QVBoxLayout>
+#include <QApplication>
+#include <QKeyEvent>
+#include <QDir>
+#include <QFile>
 
 #include "mainwindow.h"
 #include "actioncollection.h"
 
 
 
+/**
+ *
+ */
+
 MainWindow::MainWindow( QWidget* parent ) :
 	QMainWindow( parent ),
 	__actions( new ActionCollection( this ))
 {
 	setCentralWidget( __actions );
+
+	loadTheme( );
 }
 
+
+
+/**
+ *
+ */
+
+void MainWindow::keyPressEvent( QKeyEvent* event )
+{
+	if ( event->key( ) == Qt::Key_F5 ) {
+		loadTheme( );
+	}
+}
+
+
+
+/**
+ *
+ */
+
+void MainWindow::loadTheme( )
+{
+	QString theme( "njeen" );
+	QDir dir = QDir::current( );
+	dir.cd( "themes" );
+
+	QString filePath = dir.filePath( QString( "%1.css" ).arg( theme ));
+	QFile file( filePath );
+
+	if ( file.open( QFile::ReadOnly | QFile::Text )) {
+		qApp->setStyleSheet( file.readAll( ));
+		file.close( );
+	}
+}

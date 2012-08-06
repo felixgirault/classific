@@ -16,17 +16,29 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "copyaction.h"
-#include "factory.h"
+#ifndef NAMEFILTER_H
+#define NAMEFILTER_H
+
+#include "../filter.h"
 
 
 
-REGISTER_PRODUCT( Action, CopyAction, "Copy", "Copies files." )
+/**
+ *	Filters files by name.
+ */
 
-
-
-CopyAction::CopyAction( QWidget* parent ) :
-	Action( parent )
+class NameFilter : public Filter
 {
+	public:
 
-}
+		/**
+		 *	Constructor.
+		 *
+		 *	@param parent Parent widget.
+		 */
+
+		NameFilter( QWidget* parent = 0 );
+
+};
+
+#endif // NAMEFILTER_H

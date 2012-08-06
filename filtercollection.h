@@ -22,10 +22,9 @@
 #include <QFrame>
 #include <QVector>
 
-class QVBoxLayout;
-class QPushButton;
-
 class Filter;
+class VBoxLayout;
+class TypedPushButton;
 
 
 
@@ -47,7 +46,15 @@ class FilterCollection : public QFrame
 
 		FilterCollection( QWidget* parent = 0 );
 
-	public slots:
+	private:
+
+		/**
+		 *	Adds a filter frame to the collection.
+		 */
+
+		void addFrame( const QString& name, Filter* filter );
+
+	private slots:
 
 		/**
 		 *	Asks for a filter to add.
@@ -58,17 +65,17 @@ class FilterCollection : public QFrame
 
 
 		/**
-		 *	Remove the filter which triggered the slot.
+		 *	Remove the filter frame which triggered the slot.
 		 */
 
-		void removeFilter( );
+		void removeFrame( );
 
 	private:
 
 		QVector< Filter* > __filters;	//!<
 
-		QVBoxLayout* __layout;
-		QPushButton* __add;
+		VBoxLayout* __layout;
+		TypedPushButton* __add;
 		
 };
 

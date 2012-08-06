@@ -19,17 +19,53 @@
 #ifndef PICKER_H
 #define PICKER_H
 
+#include <QDialog>
+#include <QMap>
+#include <QString>
+
 
 
 /**
  *	Picker.
  */
 
-class Picker
+class Picker : public QDialog
 {
+	Q_OBJECT
+
 	public:
 
-		Picker( );
+		/**
+		 *	Constructor.
+		 *
+		 *	@param items A collection of items defined by their name and
+		 *		description.
+		 *	@param parent Parent widget.
+		 */
+
+		Picker( const QMap< QString, QString >& items, QWidget* parent = 0 );
+
+
+
+		/**
+		 *	Returns the name of the selected item.
+		 *
+		 *	@return Item name, or a null string if none were selected.
+		 */
+
+		QString selected( ) const;
+
+	public slots:
+
+		/**
+		 *	Hides the modal dialog and sets the result code to Accepted.
+		 */
+
+		void accept( );
+
+	private:
+
+		QString __selected;		//!< Name of the selected item.
 
 };
 

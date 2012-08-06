@@ -16,11 +16,64 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QVBoxLayout>
+#include <QPushButton>
+#include <QCommandLinkButton>
+
 #include "picker.h"
 
 
 
-Picker::Picker( )
-{
+/**
+ *
+ */
 
+Picker::Picker( const QMap< QString, QString >& items, QWidget* parent ) :
+	QDialog( parent )
+{
+	QVBoxLayout* layout = new QVBoxLayout( );
+	QMapIterator< QString, QString > it( items );
+
+	while ( it.hasNext( )) {
+		it.next( );
+
+		QCommandLinkButton* button = new QCommandLinkButton( it.key( ), it.value( ));
+		connect( button, SIGNAL( clicked( )), this, SLOT( accept( )));
+
+		layout->addWidget( button );
+	}
+
+	QPushButton* cancel = new QPushButton( tr( "Cancel" ));
+	connect( cancel, SIGNAL( clicked( )), this, SLOT( reject( )));
+
+	layout->addWidget( cancel );
+	setLayout( layout );
+}
+
+
+
+/**
+ *
+ */
+
+QString Picker::selected( ) const
+{
+	return __selected;
+}
+
+
+
+/**
+ *
+ */
+
+void Picker::accept( )
+{
+	QCommandLinkButton* button = qobject_cast< QCommandLinkButton* >( sender( ));
+	if ( !button ) {
+		return;
+	}
+
+	__selected = button->text( );
+	QDialog::accept( );
 }

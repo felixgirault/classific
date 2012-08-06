@@ -18,9 +18,8 @@
 
 #include <QLabel>
 
-#include "actionframe.h"
-#include "action.h"
-#include "filtercollection.h"
+#include "filterframe.h"
+#include "filter.h"
 #include "layouts.h"
 #include "typedpushbutton.h"
 
@@ -30,10 +29,9 @@
  *
  */
 
-ActionFrame::ActionFrame( const QString& name, Action* action, QWidget *parent ) :
+FilterFrame::FilterFrame( const QString& name, Filter* filter, QWidget *parent ) :
 	QFrame( parent ),
-	__action( action ),
-	__filters( new FilterCollection( this )),
+	__filter( filter ),
 	__name( new QLabel( name, this )),
 	__remove( new TypedPushButton( tr( "x" ), TypedPushButton::Negative, this ))
 {
@@ -46,8 +44,7 @@ ActionFrame::ActionFrame( const QString& name, Action* action, QWidget *parent )
 	barLayout->addWidget( __remove );
 
 	layout->addLayout( barLayout );
-	layout->addWidget( __action );
-	layout->addWidget( __filters );
+	layout->addWidget( __filter );
 
 	setLayout( layout );
 }
