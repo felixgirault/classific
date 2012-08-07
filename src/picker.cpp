@@ -66,6 +66,20 @@ QString Picker::selected( ) const
  *
  */
 
+QString Picker::pick( const QMap< QString, QString >& informations, QWidget* parent )
+{
+	Picker picker( informations, parent );
+	picker.exec( );
+
+	return picker.selected( );
+}
+
+
+
+/**
+ *
+ */
+
 void Picker::accept( )
 {
 	QCommandLinkButton* button = qobject_cast< QCommandLinkButton* >( sender( ));

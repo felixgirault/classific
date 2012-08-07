@@ -63,15 +63,11 @@ void ActionCollection::addFrame( Action* action, const QString& name )
 void ActionCollection::addAction( )
 {
 	QMap< QString, QString > informations = Factory< Action >::informations( );
+	QString selected = Picker::pick( informations, this );
 
-	Picker picker( informations, this );
-	if ( picker.exec( ) == QDialog::Rejected ) {
-		return;
-	}
-
-	Action* action = Factory< Action >::create( picker.selected( ));
+	Action* action = Factory< Action >::create( selected );
 	if ( action ) {
-		addFrame( action, picker.selected( ));
+		addFrame( action, selected );
 	}
 }
 

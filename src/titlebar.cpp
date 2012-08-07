@@ -31,8 +31,8 @@
 TitleBar::TitleBar( const QString& title, QWidget* parent ) :
 	QFrame( parent ),
 	__title( new QLabel( title, this )),
-	__toggle( new TypedPushButton( "-", TypedPushButton::Neutral, this )),
-	__remove( new TypedPushButton( "x", TypedPushButton::Negative, this ))
+	__toggle( new TypedPushButton( tr( "-" ), TypedPushButton::Neutral, this )),
+	__remove( new TypedPushButton( tr( "x" ), TypedPushButton::Negative, this ))
 {
 	connect( __toggle, SIGNAL( toggled( bool )), this, SIGNAL( toggled( bool )));
 	connect( __toggle, SIGNAL( toggled( bool )), this, SLOT( toggle( bool )));

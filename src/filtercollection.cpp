@@ -62,15 +62,11 @@ void FilterCollection::addFrame( Filter* filter, const QString& name )
 void FilterCollection::addFilter( )
 {
 	QMap< QString, QString > informations = Factory< Filter >::informations( );
+	QString selected = Picker::pick( informations, this );
 
-	Picker picker( informations, this );
-	if ( picker.exec( ) == QDialog::Rejected ) {
-		return;
-	}
-
-	Filter* filter = Factory< Filter >::create( picker.selected( ));
+	Filter* filter = Factory< Filter >::create( selected );
 	if ( filter ) {
-		addFrame( filter, picker.selected( ));
+		addFrame( filter, selected );
 	}
 }
 

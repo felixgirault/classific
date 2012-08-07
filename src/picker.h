@@ -55,6 +55,17 @@ class Picker : public QDialog
 
 		QString selected( ) const;
 
+
+
+		/**
+		 *
+		 */
+
+		static QString pick(
+			const QMap< QString, QString > &informations,
+			QWidget* parent = 0
+		);
+
 	public slots:
 
 		/**

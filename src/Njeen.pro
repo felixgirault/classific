@@ -19,14 +19,14 @@ SOURCES += main.cpp\
     filter.cpp \
     actionframe.cpp \
     actioncollection.cpp \
-    picker.cpp \
     typedpushbutton.cpp \
     layouts.cpp \
     filters/namefilter.cpp \
     actions/copyaction.cpp \
     filterframe.cpp \
     titlebar.cpp \
-    njeenapplication.cpp
+    njeenapplication.cpp \
+    picker.cpp
 
 HEADERS  += mainwindow.h \
     action.h \
