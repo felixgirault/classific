@@ -35,6 +35,7 @@ MainWindow::MainWindow( QWidget* parent ) :
 	__actions( new ActionCollection( this ))
 {
 	setCentralWidget( __actions );
+	resize( 400, 0 );
 
 	loadTheme( );
 }

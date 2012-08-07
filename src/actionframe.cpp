@@ -21,8 +21,8 @@
 #include "actionframe.h"
 #include "action.h"
 #include "filtercollection.h"
+#include "titlebar.h"
 #include "layouts.h"
-#include "typedpushbutton.h"
 
 
 
@@ -30,22 +30,16 @@
  *
  */
 
-ActionFrame::ActionFrame( const QString& name, Action* action, QWidget *parent ) :
+ActionFrame::ActionFrame( Action* action, const QString& name, QWidget *parent ) :
 	QFrame( parent ),
 	__action( action ),
-	__filters( new FilterCollection( this )),
-	__name( new QLabel( name, this )),
-	__remove( new TypedPushButton( tr( "x" ), TypedPushButton::Negative, this ))
+	__titleBar( new TitleBar( name, this )),
+	__filters( new FilterCollection( this ))
 {
-	connect( __remove, SIGNAL( clicked( )), this, SIGNAL( removeMe( )));
+	connect( __titleBar, SIGNAL( remove( )), this, SIGNAL( removeMe( )));
 
 	VBoxLayout* layout = new VBoxLayout( );
-
-	HBoxLayout* barLayout = new HBoxLayout( );
-	barLayout->addWidget( __name, 100 );
-	barLayout->addWidget( __remove );
-
-	layout->addLayout( barLayout );
+	layout->addWidget( __titleBar );
 	layout->addWidget( __action );
 	layout->addWidget( __filters );
 

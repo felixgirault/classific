@@ -52,7 +52,7 @@ class ActionCollection : public QFrame
 		 *	Adds an action frame to the collection.
 		 */
 
-		void addFrame( const QString& name, Action* action );
+		void addFrame( Action* action, const QString& name );
 
 	private slots:
 

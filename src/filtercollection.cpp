@@ -46,9 +46,9 @@ FilterCollection::FilterCollection( QWidget* parent ) :
  *
  */
 
-void FilterCollection::addFrame( const QString& name, Filter* filter )
+void FilterCollection::addFrame( Filter* filter, const QString& name )
 {
-	FilterFrame* frame = new FilterFrame( name, filter );
+	FilterFrame* frame = new FilterFrame( filter, name );
 	connect( frame, SIGNAL( removeMe( )), this, SLOT( removeFrame( )));
 
 	__layout->insertWidget( __layout->count( ) - 1, frame );
@@ -71,7 +71,7 @@ void FilterCollection::addFilter( )
 
 	Filter* filter = Factory< Filter >::create( picker.selected( ));
 	if ( filter ) {
-		addFrame( picker.selected( ), filter );
+		addFrame( filter, picker.selected( ));
 	}
 }
 

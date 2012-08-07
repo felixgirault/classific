@@ -20,8 +20,8 @@
 
 #include "filterframe.h"
 #include "filter.h"
+#include "titlebar.h"
 #include "layouts.h"
-#include "typedpushbutton.h"
 
 
 
@@ -29,21 +29,15 @@
  *
  */
 
-FilterFrame::FilterFrame( const QString& name, Filter* filter, QWidget *parent ) :
+FilterFrame::FilterFrame( Filter* filter, const QString& name, QWidget* parent ) :
 	QFrame( parent ),
 	__filter( filter ),
-	__name( new QLabel( name, this )),
-	__remove( new TypedPushButton( tr( "x" ), TypedPushButton::Negative, this ))
+	__titleBar( new TitleBar( name, this ))
 {
-	connect( __remove, SIGNAL( clicked( )), this, SIGNAL( removeMe( )));
+	connect( __titleBar, SIGNAL( remove( )), this, SIGNAL( removeMe( )));
 
 	VBoxLayout* layout = new VBoxLayout( );
-
-	HBoxLayout* barLayout = new HBoxLayout( );
-	barLayout->addWidget( __name, 100 );
-	barLayout->addWidget( __remove );
-
-	layout->addLayout( barLayout );
+	layout->addWidget( __titleBar );
 	layout->addWidget( __filter );
 
 	setLayout( layout );

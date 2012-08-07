@@ -16,49 +16,28 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FILTERFRAME_H
-#define FILTERFRAME_H
+#include <QLabel>
 
-#include <QFrame>
-#include <QWidget>
-
-class Filter;
-class TitleBar;
+#include "titlebar.h"
+#include "layouts.h"
+#include "typedpushbutton.h"
 
 
 
 /**
- *	An interface wrapper for filters.
+ *
  */
 
-class FilterFrame : public QFrame
+TitleBar::TitleBar( const QString& title, QWidget* parent ) :
+	QFrame( parent ),
+   __title( new QLabel( title, this )),
+   __remove( new TypedPushButton( tr( "x" ), TypedPushButton::Negative, this ))
 {
-	Q_OBJECT
+	connect( __remove, SIGNAL( clicked( )), this, SIGNAL( remove( )));
 
-	public:
+	HBoxLayout* layout = new HBoxLayout( );
+	layout->addWidget( __title, 100 );
+	layout->addWidget( __remove );
 
-		/**
-		 *	Constructor.
-		 *
-		 *	@param filter
-		 *	@param parent Parent widget
-		 */
-
-		FilterFrame( Filter* filter, const QString& name, QWidget* parent = 0 );
-
-	signals:
-
-		/**
-		 *
-		 */
-
-		void removeMe( );
-
-	private:
-
-		Filter* __filter;		//!< Filter.
-		TitleBar* __titleBar;	//!< Title bar.
-
-};
-
-#endif // FILTERFRAME_H
+	setLayout( layout );
+}

@@ -16,35 +16,31 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef FILTERFRAME_H
-#define FILTERFRAME_H
+#ifndef TITLEBAR_H
+#define TITLEBAR_H
 
 #include <QFrame>
-#include <QWidget>
 
-class Filter;
-class TitleBar;
+class QLabel;
+class TypedPushButton;
 
 
 
 /**
- *	An interface wrapper for filters.
+ *
  */
 
-class FilterFrame : public QFrame
+class TitleBar : public QFrame
 {
 	Q_OBJECT
 
 	public:
 
 		/**
-		 *	Constructor.
 		 *
-		 *	@param filter
-		 *	@param parent Parent widget
 		 */
 
-		FilterFrame( Filter* filter, const QString& name, QWidget* parent = 0 );
+		TitleBar( const QString& title, QWidget* parent = 0 );
 
 	signals:
 
@@ -52,13 +48,13 @@ class FilterFrame : public QFrame
 		 *
 		 */
 
-		void removeMe( );
+		void remove( );
 
 	private:
 
-		Filter* __filter;		//!< Filter.
-		TitleBar* __titleBar;	//!< Title bar.
-
+		QLabel* __title;			//!< Title label.
+		TypedPushButton* __remove;	//!< A button to request a closing.
+		
 };
 
-#endif // FILTERFRAME_H
+#endif // TITLEBAR_H

@@ -21,10 +21,8 @@
 
 #include <QFrame>
 
-class QLabel;
-class TypedPushButton;
-
 class Action;
+class TitleBar;
 class FilterCollection;
 
 
@@ -46,7 +44,7 @@ class ActionFrame : public QFrame
 		 *	@param parent Parent widget
 		 */
 
-		ActionFrame( const QString& name, Action* action, QWidget* parent = 0 );
+		ActionFrame( Action* action, const QString& name, QWidget* parent = 0 );
 
 	signals:
 
@@ -59,10 +57,8 @@ class ActionFrame : public QFrame
 	private:
 
 		Action* __action;			//!< Action.
+		TitleBar* __titleBar;		//!< Title bar.
 		FilterCollection* __filters;	//!< Collection of filters.
-
-		QLabel* __name;			//!< Name label.
-		TypedPushButton* __remove;		//!< A button to close the frame.
 		
 };
 

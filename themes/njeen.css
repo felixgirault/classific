@@ -1,3 +1,26 @@
+TypedPushButton {
+	border: none;
+	padding: 0 5px;
+}
+
+/* negative button */
+TypedPushButton[type="0"] {
+	background-color: #c02;
+	color: #fff;
+}
+
+/* neutral button */
+TypedPushButton[type="1"] {
+	background-color: #888;
+	color: #fff;
+}
+
+/* positive button */
+TypedPushButton[type="2"] {
+	background-color: #8c0;
+	color: #fff;
+}
+
 QMainWindow {
 	background-color: #222;
 }
@@ -21,25 +44,16 @@ FilterFrame {
 	border-top: 1px solid #ddd;
 }
 
-TypedPushButton {
-	border: none;
-	padding: 0 5px;
+ActionCollection > TypedPushButton,
+FilterCollection > TypedPushButton {
+	padding: 10px 20px;
 }
 
-/* negative button */
-TypedPushButton[type="0"] {
-	background-color: #c02;
-	color: #fff;
+TitleBar {
+	padding: 10px 20px;
 }
 
-/* neutral button */
-TypedPushButton[type="1"] {
-	background-color: #888;
-	color: #fff;
-}
-
-/* positive button */
-TypedPushButton[type="2"] {
-	background-color: #8c0;
-	color: #fff;
+Action,
+Filter {
+	padding: 20px;
 }

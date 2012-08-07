@@ -52,7 +52,7 @@ class FilterCollection : public QFrame
 		 *	Adds a filter frame to the collection.
 		 */
 
-		void addFrame( const QString& name, Filter* filter );
+		void addFrame( Filter* filter, const QString& name );
 
 	private slots:
 

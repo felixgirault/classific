@@ -47,9 +47,9 @@ ActionCollection::ActionCollection( QWidget* parent ) :
  *
  */
 
-void ActionCollection::addFrame( const QString& name, Action* action )
+void ActionCollection::addFrame( Action* action, const QString& name )
 {
-	ActionFrame* frame = new ActionFrame( name, action );
+	ActionFrame* frame = new ActionFrame( action, name );
 	connect( frame, SIGNAL( removeMe( )), this, SLOT( removeFrame( )));
 
 	__layout->insertWidget( __layout->count( ) - 1, frame );
@@ -72,7 +72,7 @@ void ActionCollection::addAction( )
 
 	Action* action = Factory< Action >::create( picker.selected( ));
 	if ( action ) {
-		addFrame( picker.selected( ), action );
+		addFrame( action, picker.selected( ));
 	}
 }
 
