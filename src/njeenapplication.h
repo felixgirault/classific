@@ -16,36 +16,41 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QKeyEvent>
+#ifndef NJEENAPPLICATION_H
+#define NJEENAPPLICATION_H
 
-#include "mainwindow.h"
-#include "actioncollection.h"
-#include "njeenapplication.h"
-
-
-
-/**
- *
- */
-
-MainWindow::MainWindow( QWidget* parent ) :
-	QMainWindow( parent ),
-	__actions( new ActionCollection( this ))
-{
-	setCentralWidget( __actions );
-	resize( 400, 0 );
-}
+#include <QApplication>
+#include <QEvent>
 
 
 
 /**
- *
+ *	The Njeen application.
  */
 
-void MainWindow::keyPressEvent( QKeyEvent* event )
+class NjeenApplication : public QApplication
 {
-	if ( event->key( ) == Qt::Key_F5 ) {
-		NjeenApplication* application = qobject_cast< NjeenApplication* >( qApp );
-		application->loadTheme( );
-	}
-}
+	Q_OBJECT
+
+	public:
+
+		/**
+		 *	Constructor.
+		 *
+		 *	@param argc Command line argument count.
+		 *	@param argv Command line arguments.
+		 */
+
+		NjeenApplication( int& argc, char** argv );
+
+
+
+		/**
+		 *	Loads the user theme.
+		 */
+
+		void loadTheme( );
+		
+};
+
+#endif // NJEENAPPLICATION_H

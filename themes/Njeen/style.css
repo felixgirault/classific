@@ -40,8 +40,8 @@ FilterCollection {
 }
 
 FilterFrame {
-	margin-bottom: 20px;
 	border-top: 1px solid #ddd;
+	background-color: #eee;
 }
 
 ActionCollection > TypedPushButton,
@@ -50,10 +50,42 @@ FilterCollection > TypedPushButton {
 }
 
 TitleBar {
-	padding: 10px 20px;
+	margin-bottom: 1px;
+	border-bottom: 1px solid #ddd;
+	padding: 10px;
+}
+
+TitleBar QLabel {
+	font-weight: bold;
+}
+
+TitleBar TypedPushButton[type="0"],
+TitleBar TypedPushButton[type="1"],
+TitleBar TypedPushButton[type="2"] {
+	margin-left: 2px;
+	padding-left: 0;
+	padding-right: 0;
+	width: 20px;
+	background-color: transparent;
+	color: #000;
+}
+
+TitleBar TypedPushButton[type="0"]:hover {
+	background-color: #c02;
+	color: #fff;
+}
+
+TitleBar TypedPushButton[type="1"]:hover {
+	background-color: #888;
+	color: #fff;
+}
+
+TitleBar TypedPushButton[type="2"]:hover {
+	background-color: #8c0;
+	color: #fff;
 }
 
 Action,
 Filter {
-	padding: 20px;
+	margin: 20px;
 }

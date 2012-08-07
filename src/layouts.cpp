@@ -45,3 +45,16 @@ VBoxLayout::VBoxLayout( QWidget* parent ) :
 	setContentsMargins( QMargins( ));
 	setSpacing( 0 );
 }
+
+
+
+/**
+ *
+ */
+
+FormLayout::FormLayout( QWidget* parent ) :
+	QFormLayout( parent )
+{
+	setContentsMargins( QMargins( ));
+	setSpacing( 0 );
+}

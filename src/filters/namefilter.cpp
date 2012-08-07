@@ -16,8 +16,11 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QLineEdit>
+
 #include "namefilter.h"
 #include "../factory.h"
+#include "../layouts.h"
 
 
 
@@ -34,5 +37,9 @@ REGISTER_PRODUCT( Filter, NameFilter, "Name", "Filters files by name." )
  */
 
 NameFilter::NameFilter( QWidget* parent ) :
-	Filter( parent )
-{ }
+	Filter( parent ),
+	__layout( new FormLayout( this )),
+	__pattern( new QLineEdit( this ))
+{
+	__layout->addRow( tr( "Name" ), __pattern );
+}

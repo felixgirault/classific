@@ -21,6 +21,9 @@
 
 #include "../filter.h"
 
+class FormLayout;
+class QLineEdit;
+
 
 
 /**
@@ -38,6 +41,11 @@ class NameFilter : public Filter
 		 */
 
 		NameFilter( QWidget* parent = 0 );
+
+	private:
+
+		FormLayout* __layout;	//!< Layout.
+		QLineEdit* __pattern;	//!< Name pattern.
 
 };
 

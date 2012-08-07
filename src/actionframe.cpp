@@ -36,12 +36,12 @@ ActionFrame::ActionFrame( Action* action, const QString& name, QWidget *parent )
 	__titleBar( new TitleBar( name, this )),
 	__filters( new FilterCollection( this ))
 {
+	connect( __titleBar, SIGNAL( toggled( bool )), __action, SLOT( setHidden( bool )));
+	connect( __titleBar, SIGNAL( toggled( bool )), __filters, SLOT( setHidden( bool )));
 	connect( __titleBar, SIGNAL( remove( )), this, SIGNAL( removeMe( )));
 
-	VBoxLayout* layout = new VBoxLayout( );
+	VBoxLayout* layout = new VBoxLayout( this );
 	layout->addWidget( __titleBar );
 	layout->addWidget( __action );
 	layout->addWidget( __filters );
-
-	setLayout( layout );
 }

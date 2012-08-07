@@ -29,7 +29,7 @@
  */
 
 Action::Action( QWidget* parent ) :
-	QWidget( parent )
+	QFrame( parent )
 {
 
 }

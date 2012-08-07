@@ -37,7 +37,6 @@ FilterCollection::FilterCollection( QWidget* parent ) :
 	connect( __add, SIGNAL( clicked( )), this, SLOT( addFilter( )));
 
 	__layout->addWidget( __add );
-	setLayout( __layout );
 }
 
 

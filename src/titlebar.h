@@ -48,12 +48,29 @@ class TitleBar : public QFrame
 		 *
 		 */
 
+		void toggled( bool toggle );
+
+
+
+		/**
+		 *
+		 */
+
 		void remove( );
+
+	private slots:
+
+		/**
+		 *
+		 */
+
+		void toggle( bool toggle );
 
 	private:
 
 		QLabel* __title;			//!< Title label.
-		TypedPushButton* __remove;	//!< A button to request a closing.
+		TypedPushButton* __toggle;	//!< A button to request toggling.
+		TypedPushButton* __remove;	//!< A button to request closing.
 		
 };
 

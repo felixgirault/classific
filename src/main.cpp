@@ -16,8 +16,7 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QApplication>
-
+#include "njeenapplication.h"
 #include "mainwindow.h"
 
 
@@ -28,10 +27,10 @@
 
 int main( int argc, char *argv[ ])
 {
-    QApplication application( argc, argv );
+	NjeenApplication application( argc, argv );
 
-    MainWindow window;
-    window.show( );
-    
-    return application.exec( );
+	MainWindow window;
+	window.show( );
+
+	return application.exec( );
 }

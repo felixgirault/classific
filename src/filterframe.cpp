@@ -32,13 +32,12 @@
 FilterFrame::FilterFrame( Filter* filter, const QString& name, QWidget* parent ) :
 	QFrame( parent ),
 	__filter( filter ),
+	__layout( new VBoxLayout( this )),
 	__titleBar( new TitleBar( name, this ))
 {
+	connect( __titleBar, SIGNAL( toggled( bool )), __filter, SLOT( setHidden( bool )));
 	connect( __titleBar, SIGNAL( remove( )), this, SIGNAL( removeMe( )));
 
-	VBoxLayout* layout = new VBoxLayout( );
-	layout->addWidget( __titleBar );
-	layout->addWidget( __filter );
-
-	setLayout( layout );
+	__layout->addWidget( __titleBar );
+	__layout->addWidget( __filter );
 }

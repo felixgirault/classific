@@ -19,7 +19,7 @@
 #ifndef ACTION_H
 #define ACTION_H
 
-#include <QWidget>
+#include <QFrame>
 
 #include "factory.h"
 
@@ -33,7 +33,7 @@ class QPushButton;
  *	Base class for an action.
  */
 
-class Action : public QWidget
+class Action : public QFrame
 {
 	Q_OBJECT
 

@@ -19,7 +19,7 @@
 #ifndef FILTER_H
 #define FILTER_H
 
-#include <QWidget>
+#include <QFrame>
 
 
 
@@ -27,7 +27,7 @@
  *	Base class for a filter.
  */
 
-class Filter : public QWidget
+class Filter : public QFrame
 {
 	Q_OBJECT
 

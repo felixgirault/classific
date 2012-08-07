@@ -30,14 +30,33 @@
 
 TitleBar::TitleBar( const QString& title, QWidget* parent ) :
 	QFrame( parent ),
-   __title( new QLabel( title, this )),
-   __remove( new TypedPushButton( tr( "x" ), TypedPushButton::Negative, this ))
+	__title( new QLabel( title, this )),
+	__toggle( new TypedPushButton( "-", TypedPushButton::Neutral, this )),
+	__remove( new TypedPushButton( "x", TypedPushButton::Negative, this ))
 {
+	connect( __toggle, SIGNAL( toggled( bool )), this, SIGNAL( toggled( bool )));
+	connect( __toggle, SIGNAL( toggled( bool )), this, SLOT( toggle( bool )));
 	connect( __remove, SIGNAL( clicked( )), this, SIGNAL( remove( )));
 
-	HBoxLayout* layout = new HBoxLayout( );
-	layout->addWidget( __title, 100 );
-	layout->addWidget( __remove );
+	__toggle->setCheckable( true );
 
-	setLayout( layout );
+	HBoxLayout* layout = new HBoxLayout( this );
+	layout->addWidget( __title, 100 );
+	layout->addWidget( __toggle );
+	layout->addWidget( __remove );
+}
+
+
+
+/**
+ *
+ */
+
+void TitleBar::toggle( bool toggle )
+{
+	if ( toggle ) {
+		__toggle->setText( tr( "+" ));
+	} else {
+		__toggle->setText( tr( "-" ));
+	}
 }

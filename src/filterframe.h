@@ -23,6 +23,7 @@
 #include <QWidget>
 
 class Filter;
+class VBoxLayout;
 class TitleBar;
 
 
@@ -57,6 +58,8 @@ class FilterFrame : public QFrame
 	private:
 
 		Filter* __filter;		//!< Filter.
+
+		VBoxLayout* __layout;
 		TitleBar* __titleBar;	//!< Title bar.
 
 };

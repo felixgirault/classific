@@ -16,10 +16,9 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QKeyEvent>
+#include <QDir>
+#include <QFile>
 
-#include "mainwindow.h"
-#include "actioncollection.h"
 #include "njeenapplication.h"
 
 
@@ -28,12 +27,10 @@
  *
  */
 
-MainWindow::MainWindow( QWidget* parent ) :
-	QMainWindow( parent ),
-	__actions( new ActionCollection( this ))
+NjeenApplication::NjeenApplication( int& argc, char** argv ) :
+	QApplication( argc, argv )
 {
-	setCentralWidget( __actions );
-	resize( 400, 0 );
+	loadTheme( );
 }
 
 
@@ -42,10 +39,19 @@ MainWindow::MainWindow( QWidget* parent ) :
  *
  */
 
-void MainWindow::keyPressEvent( QKeyEvent* event )
+void NjeenApplication::loadTheme( )
 {
-	if ( event->key( ) == Qt::Key_F5 ) {
-		NjeenApplication* application = qobject_cast< NjeenApplication* >( qApp );
-		application->loadTheme( );
+	QString theme( "Njeen" );
+
+	QDir dir = QDir::current( );
+	dir.cd( "themes" );
+	dir.cd( theme );
+
+	QString filePath = dir.filePath( "style.css" );
+	QFile file( filePath );
+
+	if ( file.open( QFile::ReadOnly | QFile::Text )) {
+		setStyleSheet( file.readAll( ));
+		file.close( );
 	}
 }

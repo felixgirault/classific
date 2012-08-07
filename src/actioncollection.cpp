@@ -36,9 +36,8 @@ ActionCollection::ActionCollection( QWidget* parent ) :
 {
 	connect( __add, SIGNAL( clicked( )), this, SLOT( addAction( )));
 
+	__layout->addStretch( 100 );
 	__layout->addWidget( __add );
-
-	setLayout( __layout );
 }
 
 
@@ -52,7 +51,7 @@ void ActionCollection::addFrame( Action* action, const QString& name )
 	ActionFrame* frame = new ActionFrame( action, name );
 	connect( frame, SIGNAL( removeMe( )), this, SLOT( removeFrame( )));
 
-	__layout->insertWidget( __layout->count( ) - 1, frame );
+	__layout->insertWidget( __layout->count( ) - 2, frame );
 }
 
 

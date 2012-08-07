@@ -25,7 +25,8 @@ SOURCES += main.cpp\
     filters/namefilter.cpp \
     actions/copyaction.cpp \
     filterframe.cpp \
-    titlebar.cpp
+    titlebar.cpp \
+    njeenapplication.cpp
 
 HEADERS  += mainwindow.h \
     action.h \
@@ -40,6 +41,8 @@ HEADERS  += mainwindow.h \
     filters/namefilter.h \
     actions/copyaction.h \
     filterframe.h \
-    titlebar.h
+    titlebar.h \
+    njeenapplication.h
 
-OTHER_FILES += ../themes/njeen.css
+OTHER_FILES += \
+    ../themes/Njeen/style.css

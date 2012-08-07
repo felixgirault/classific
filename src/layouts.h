@@ -21,6 +21,7 @@
 
 #include <QHBoxLayout>
 #include <QVBoxLayout>
+#include <QFormLayout>
 
 
 
@@ -59,6 +60,26 @@ class VBoxLayout : public QVBoxLayout
 		 */
 
 		VBoxLayout( QWidget* parent = 0 );
+
+};
+
+
+
+/**
+ *
+ */
+
+class FormLayout : public QFormLayout
+{
+	public:
+
+		/**
+		 *	Constructor.
+		 *
+		 *	@param parent Parent widget.
+		 */
+
+		FormLayout( QWidget* parent = 0 );
 
 };
 

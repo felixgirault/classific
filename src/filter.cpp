@@ -25,7 +25,7 @@
  */
 
 Filter::Filter( QWidget* parent ) :
-	QWidget( parent )
+	QFrame( parent )
 {
 
 }

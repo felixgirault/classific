@@ -31,7 +31,7 @@
 Picker::Picker( const QMap< QString, QString >& items, QWidget* parent ) :
 	QDialog( parent )
 {
-	QVBoxLayout* layout = new QVBoxLayout( );
+	QVBoxLayout* layout = new QVBoxLayout( this );
 	QMapIterator< QString, QString > it( items );
 
 	while ( it.hasNext( )) {
@@ -47,7 +47,6 @@ Picker::Picker( const QMap< QString, QString >& items, QWidget* parent ) :
 	connect( cancel, SIGNAL( clicked( )), this, SLOT( reject( )));
 
 	layout->addWidget( cancel );
-	setLayout( layout );
 }
 
 

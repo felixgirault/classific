@@ -46,19 +46,12 @@ class MainWindow : public QMainWindow
 	protected:
 
 		/**
+		 *	Reloads the user theme when pressing F5.
 		 *
-		 *	@param event
+		 *	@param event Event.
 		 */
 
 		void keyPressEvent( QKeyEvent* event );
-
-	private:
-
-		/**
-		 *
-		 */
-
-		void loadTheme( );
 
 	private:
 
