@@ -17,16 +17,47 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "filter.h"
+#ifndef EXTRACTACTION_H
+#define EXTRACTACTION_H
+
+#include "../action.h"
+
+class FormLayout;
+class PathEdit;
+class QLineEdit;
 
 
 
 /**
- *
+ *	Extracts archives.
  */
 
-Filter::Filter( QWidget* parent ) :
-	QFrame( parent )
+class ExtractAction : public Action
 {
+	public:
 
-}
+		/**
+		 *	Constructor.
+		 *
+		 *	@param parent Parent widget.
+		 */
+
+		ExtractAction( QWidget* parent = 0 );
+
+
+
+		/**
+		 *	Executes the action.
+		 */
+
+		void run( Execution::File& file );
+
+	private:
+
+		FormLayout* __layout;
+		PathEdit* __destination;
+		QLineEdit* __password;
+
+};
+
+#endif // EXTRACTACTION_H

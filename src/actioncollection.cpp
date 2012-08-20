@@ -1,11 +1,12 @@
 /**
- *	Njeen - Files processing made easy.
  *	Copyright (C) 2012 Félix Girault
  *
- *	This program is free software: you can redistribute it and/or modify it
- *	under the terms of the GNU General Public License as published by the Free
- *	Software Foundation, either version 3 of the License, or (at your option)
- *	any later version.
+ *	This file is part of Njeen.
+ *
+ *	Njeen is free software: you can redistribute it and/or modify it under the
+ *	terms of the GNU General Public License as published by the Free Software
+ *	Foundation, either version 3 of the License, or (at your option) any later
+ *	version.
  *
  *	This program is distributed in the hope that it will be useful, but WITHOUT
  *	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
@@ -32,12 +33,25 @@
 ActionCollection::ActionCollection( QWidget* parent ) :
 	QFrame( parent ),
 	__layout( new VBoxLayout( this )),
-	__add( new TypedPushButton( tr( "Add action" ), TypedPushButton::Positive, this ))
+	__add( new TypedPushButton( tr( "Add action" ), TypedPushButton::Positive ))
 {
 	connect( __add, SIGNAL( clicked( )), this, SLOT( addAction( )));
 
 	__layout->addStretch( 100 );
 	__layout->addWidget( __add );
+}
+
+
+
+/**
+ *
+ */
+
+void ActionCollection::runActions( Execution& execution )
+{
+	foreach ( Action* action, __actions ) {
+
+	}
 }
 
 
@@ -66,7 +80,9 @@ void ActionCollection::addAction( )
 	QString selected = Picker::pick( informations, this );
 
 	Action* action = Factory< Action >::create( selected );
+
 	if ( action ) {
+		__actions.append( action );
 		addFrame( action, selected );
 	}
 }

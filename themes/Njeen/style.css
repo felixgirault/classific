@@ -1,22 +1,41 @@
+/**
+ *	Copyright (C) 2012 Félix Girault
+ *
+ *	This file is part of Njeen.
+ *
+ *	Njeen is free software: you can redistribute it and/or modify it under the
+ *	terms of the GNU General Public License as published by the Free Software
+ *	Foundation, either version 3 of the License, or (at your option) any later
+ *	version.
+ *
+ *	This program is distributed in the hope that it will be useful, but WITHOUT
+ *	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
+ *	FITNESS FOR A PARTICULAR PURPOSE.  See the GNU General Public License for
+ *	more details.
+ *
+ *	You should have received a copy of the GNU General Public License along
+ *	with this program. If not, see <http://www.gnu.org/licenses/>.
+ */
+
 TypedPushButton {
 	border: none;
 	padding: 0 5px;
+	background-color: transparent;
+	color: #222;
+	font-weight: bold;
 }
 
-/* negative button */
-TypedPushButton[type="0"] {
+TypedPushButton[type="0"]:hover {	/* negative button */
 	background-color: #c02;
 	color: #fff;
 }
 
-/* neutral button */
-TypedPushButton[type="1"] {
-	background-color: #888;
+TypedPushButton[type="1"]:hover {	/* neutral button */
+	background-color: #ddd;
 	color: #fff;
 }
 
-/* positive button */
-TypedPushButton[type="2"] {
+TypedPushButton[type="2"]:hover {	/* positive button */
 	background-color: #8c0;
 	color: #fff;
 }
@@ -27,6 +46,7 @@ QMainWindow {
 
 ActionCollection {
 	margin: 20px;
+	max-width: 600px;
 }
 
 ActionFrame {
@@ -44,9 +64,10 @@ FilterFrame {
 	background-color: #eee;
 }
 
-ActionCollection > TypedPushButton,
-FilterCollection > TypedPushButton {
+ActionCollection > TypedPushButton[type="2"],
+FilterCollection > TypedPushButton[type="2"] {
 	padding: 10px 20px;
+	background: #b1d95f;
 }
 
 TitleBar {
@@ -59,30 +80,11 @@ TitleBar QLabel {
 	font-weight: bold;
 }
 
-TitleBar TypedPushButton[type="0"],
-TitleBar TypedPushButton[type="1"],
-TitleBar TypedPushButton[type="2"] {
+TitleBar TypedPushButton {
 	margin-left: 2px;
 	padding-left: 0;
 	padding-right: 0;
 	width: 20px;
-	background-color: transparent;
-	color: #000;
-}
-
-TitleBar TypedPushButton[type="0"]:hover {
-	background-color: #c02;
-	color: #fff;
-}
-
-TitleBar TypedPushButton[type="1"]:hover {
-	background-color: #888;
-	color: #fff;
-}
-
-TitleBar TypedPushButton[type="2"]:hover {
-	background-color: #8c0;
-	color: #fff;
 }
 
 Action,

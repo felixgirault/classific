@@ -17,7 +17,16 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "filter.h"
+#ifndef RUNNER_H
+#define RUNNER_H
+
+#include <QFrame>
+
+#include "execution.h"
+
+class FormLayout;
+class PathEdit;
+class TypedPushButton;
 
 
 
@@ -25,8 +34,41 @@
  *
  */
 
-Filter::Filter( QWidget* parent ) :
-	QFrame( parent )
+class Runner : public QFrame
 {
+	Q_OBJECT
 
-}
+	public:
+
+		/**
+		 *
+		 */
+
+		Runner( QWidget* parent = 0 );
+
+	signals:
+
+		/**
+		 *
+		 */
+
+		void run( Execution& execution );
+
+	private slots:
+
+		/**
+		 *
+		 */
+
+		void run( );
+		
+	private:
+
+		FormLayout* __layout;		//!<
+		PathEdit* __path;			//!<
+		TypedPushButton* __explain;	//!<
+		TypedPushButton* __run;		//!<
+		
+};
+
+#endif // RUNNER_H

@@ -1,11 +1,12 @@
 /**
- *	Njeen - Files processing made easy.
  *	Copyright (C) 2012 Félix Girault
  *
- *	This program is free software: you can redistribute it and/or modify it
- *	under the terms of the GNU General Public License as published by the Free
- *	Software Foundation, either version 3 of the License, or (at your option)
- *	any later version.
+ *	This file is part of Njeen.
+ *
+ *	Njeen is free software: you can redistribute it and/or modify it under the
+ *	terms of the GNU General Public License as published by the Free Software
+ *	Foundation, either version 3 of the License, or (at your option) any later
+ *	version.
  *
  *	This program is distributed in the hope that it will be useful, but WITHOUT
  *	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
@@ -20,8 +21,9 @@
 #define ACTION_H
 
 #include <QFrame>
+#include <QFileInfo>
 
-#include "factory.h"
+#include "execution.h"
 
 class QLabel;
 class QProgressBar;
@@ -53,15 +55,7 @@ class Action : public QFrame
 		 *	Executes the action.
 		 */
 
-		void run( );
-
-
-
-		/**
-		 *	Explains what the action would do.
-		 */
-
-		void explain( ) const;
+		virtual void run( Execution::File& file ) = 0;
 
 	private:
 

@@ -17,16 +17,38 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "filter.h"
+#ifndef EXECUTEACTION_H
+#define EXECUTEACTION_H
+
+#include "../action.h"
+
 
 
 
 /**
- *
+ *	Execute commands.
  */
 
-Filter::Filter( QWidget* parent ) :
-	QFrame( parent )
+class ExecuteAction : public Action
 {
+	public:
 
-}
+		/**
+		 *	Constructor.
+		 *
+		 *	@param parent Parent widget.
+		 */
+
+		ExecuteAction( QWidget* parent = 0 );
+
+
+
+		/**
+		 *	Executes the action.
+		 */
+
+		void run( Execution::File& file );
+
+};
+
+#endif // EXECUTEACTION_H

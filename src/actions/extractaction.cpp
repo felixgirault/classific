@@ -17,10 +17,12 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "copyaction.h"
+#include <QLineEdit>
+
+#include "extractaction.h"
+#include "../factory.h"
 #include "../layouts.h"
 #include "../pathedit.h"
-#include "../factory.h"
 
 
 
@@ -28,7 +30,7 @@
  *
  */
 
-REGISTER_PRODUCT( Action, CopyAction, "Copy", "Copies files." )
+REGISTER_PRODUCT( Action, ExtractAction, "Extract", "Extract archives." )
 
 
 
@@ -36,12 +38,16 @@ REGISTER_PRODUCT( Action, CopyAction, "Copy", "Copies files." )
  *
  */
 
-CopyAction::CopyAction( QWidget* parent ) :
+ExtractAction::ExtractAction( QWidget* parent ) :
 	Action( parent ),
 	__layout( new FormLayout( this )),
-	__destination( new PathEdit( this ))
+	__destination( new PathEdit( this )),
+	__password( new QLineEdit( this ))
 {
+	__password->setEchoMode( QLineEdit::Password );
+
 	__layout->addRow( tr( "Destination" ), __destination );
+	__layout->addRow( tr( "Password" ), __password );
 }
 
 
@@ -50,26 +56,23 @@ CopyAction::CopyAction( QWidget* parent ) :
  *
  */
 
-void CopyAction::run( Execution::File& file )
+void ExtractAction::run( Execution::File& file )
 {
 	QString path = file.compilePath( __destination->path( ));
 
 	switch ( file.execution( ).mode( )) {
 		case Execution::Explain:
-			file.addExplanation( QString( "Will be moved to '%s'" ).arg( path ));
+			file.addExplanation( QString( "Will be extracted to '%s'" ).arg( path ));
 			break;
 
 		case Execution::Run:
 			{
-				bool copied = QFile::copy(
-					file.info( ).canonicalFilePath( ),
-					QDir( path ).filePath( file.info( ).fileName( ))
-				);
+				bool extracted = true;
 
-				if ( copied ) {
-					file.addExplanation( QString( "Has been moved to '%s'" ).arg( path ));
+				if ( extracted ) {
+					file.addExplanation( QString( "Has been extracted to '%s'" ).arg( path ));
 				} else {
-					file.addError( QString( "Couldn't be moved to '%s'" ).arg( path ));
+					file.addError( QString( "Couldn't be extracted to '%s'" ).arg( path ));
 				}
 			}
 			break;

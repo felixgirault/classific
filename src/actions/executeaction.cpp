@@ -17,7 +17,8 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include "filter.h"
+#include "executeaction.h"
+#include "../factory.h"
 
 
 
@@ -25,8 +26,35 @@
  *
  */
 
-Filter::Filter( QWidget* parent ) :
-	QFrame( parent )
+REGISTER_PRODUCT( Action, ExecuteAction, "Execute", "Execute commands." )
+
+
+
+/**
+ *
+ */
+
+ExecuteAction::ExecuteAction( QWidget* parent ) :
+	Action( parent )
 {
 
+}
+
+
+
+/**
+ *
+ */
+
+void ExecuteAction::run( Execution::File& file )
+{
+	switch ( file.execution( ).mode( )) {
+		case Execution::Explain:
+
+			break;
+
+		case Execution::Run:
+
+			break;
+	}
 }

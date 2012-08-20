@@ -1,11 +1,12 @@
 /**
- *	Njeen - Files processing made easy.
  *	Copyright (C) 2012 Félix Girault
  *
- *	This program is free software: you can redistribute it and/or modify it
- *	under the terms of the GNU General Public License as published by the Free
- *	Software Foundation, either version 3 of the License, or (at your option)
- *	any later version.
+ *	This file is part of Njeen.
+ *
+ *	Njeen is free software: you can redistribute it and/or modify it under the
+ *	terms of the GNU General Public License as published by the Free Software
+ *	Foundation, either version 3 of the License, or (at your option) any later
+ *	version.
  *
  *	This program is distributed in the hope that it will be useful, but WITHOUT
  *	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
@@ -34,7 +35,7 @@ ActionFrame::ActionFrame( Action* action, const QString& name, QWidget *parent )
 	QFrame( parent ),
 	__action( action ),
 	__titleBar( new TitleBar( name, this )),
-	__filters( new FilterCollection( this ))
+	__filters( new FilterCollection( ))
 {
 	connect( __titleBar, SIGNAL( toggled( bool )), __action, SLOT( setHidden( bool )));
 	connect( __titleBar, SIGNAL( toggled( bool )), __filters, SLOT( setHidden( bool )));

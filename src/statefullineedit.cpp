@@ -17,10 +17,9 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#include <QVariant>
 #include <QStyle>
 
-#include "typedpushbutton.h"
+#include "statefullineedit.h"
 
 
 
@@ -28,8 +27,8 @@
  *
  */
 
-TypedPushButton::TypedPushButton( QWidget* parent ) :
-	QPushButton( parent )
+StatefulLineEdit::StatefulLineEdit( QWidget *parent ) :
+	QLineEdit( parent )
 { }
 
 
@@ -38,24 +37,10 @@ TypedPushButton::TypedPushButton( QWidget* parent ) :
  *
  */
 
-TypedPushButton::TypedPushButton( const QString& text, QWidget* parent ) :
-	QPushButton( text, parent )
-{ }
-
-
-
-/**
- *
- */
-
-TypedPushButton::TypedPushButton(
-	const QString& text,
-	Type type,
-	QWidget* parent
-) :
-	QPushButton( text, parent )
+StatefulLineEdit::StatefulLineEdit( State state, QWidget *parent ) :
+	QLineEdit( parent )
 {
-	setProperty( "type", QVariant( type ));
+	setProperty( "state", state );
 }
 
 
@@ -64,9 +49,9 @@ TypedPushButton::TypedPushButton(
  *
  */
 
-TypedPushButton::Type TypedPushButton::type( ) const
+StatefulLineEdit::State StatefulLineEdit::state( ) const
 {
-	return __type;
+	return __state;
 }
 
 
@@ -75,9 +60,9 @@ TypedPushButton::Type TypedPushButton::type( ) const
  *
  */
 
-void TypedPushButton::setType( Type type )
+void StatefulLineEdit::setState( State state )
 {
-	__type = type;
+	__state = state;
 }
 
 
@@ -86,9 +71,9 @@ void TypedPushButton::setType( Type type )
  *
  */
 
-void TypedPushButton::setProperty( const char* name, const QVariant& value )
+void StatefulLineEdit::setProperty( const char* name, const QVariant& value )
 {
-	QPushButton::setProperty( name, value );
+	QLineEdit::setProperty( name, value );
 
 	style( )->unpolish( this );
 	style( )->polish( this );

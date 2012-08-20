@@ -1,11 +1,12 @@
 /**
- *	Njeen - Files processing made easy.
  *	Copyright (C) 2012 Félix Girault
  *
- *	This program is free software: you can redistribute it and/or modify it
- *	under the terms of the GNU General Public License as published by the Free
- *	Software Foundation, either version 3 of the License, or (at your option)
- *	any later version.
+ *	This file is part of Njeen.
+ *
+ *	Njeen is free software: you can redistribute it and/or modify it under the
+ *	terms of the GNU General Public License as published by the Free Software
+ *	Foundation, either version 3 of the License, or (at your option) any later
+ *	version.
  *
  *	This program is distributed in the hope that it will be useful, but WITHOUT
  *	ANY WARRANTY; without even the implied warranty of MERCHANTABILITY or
@@ -16,10 +17,13 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QLayout>
 #include <QKeyEvent>
 
 #include "mainwindow.h"
+#include "layouts.h"
 #include "actioncollection.h"
+#include "runner.h"
 #include "njeenapplication.h"
 
 
@@ -30,10 +34,25 @@
 
 MainWindow::MainWindow( QWidget* parent ) :
 	QMainWindow( parent ),
-	__actions( new ActionCollection( this ))
+	__layout( new VBoxLayout( )),
+	__actions( new ActionCollection( )),
+	__runner( new Runner( ))
 {
-	setCentralWidget( __actions );
-	resize( 400, 0 );
+	connect(
+		__runner, SIGNAL( run( Execution& )),
+		__actions, SLOT( runActions( Execution& ))
+	);
+
+	__layout->addWidget( __actions );
+	__layout->setAlignment( __actions, Qt::AlignHCenter );
+
+	__layout->addWidget( __runner );
+
+	QWidget* centralWidget = new QWidget( );
+	centralWidget->setLayout( __layout );
+
+	setCentralWidget( centralWidget );
+	resize( 600, 0 );
 }
 
 
