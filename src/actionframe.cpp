@@ -34,15 +34,29 @@
 ActionFrame::ActionFrame( Action* action, const QString& name, QWidget *parent ) :
 	QFrame( parent ),
 	__action( action ),
-	__titleBar( new TitleBar( name, this )),
+	__layout( new VBoxLayout( this )),
+	__titleBar( new TitleBar( name )),
 	__filters( new FilterCollection( ))
 {
 	connect( __titleBar, SIGNAL( toggled( bool )), __action, SLOT( setHidden( bool )));
 	connect( __titleBar, SIGNAL( toggled( bool )), __filters, SLOT( setHidden( bool )));
 	connect( __titleBar, SIGNAL( remove( )), this, SIGNAL( removeMe( )));
 
-	VBoxLayout* layout = new VBoxLayout( this );
-	layout->addWidget( __titleBar );
-	layout->addWidget( __action );
-	layout->addWidget( __filters );
+	__layout->addWidget( __titleBar );
+	__layout->addWidget( __action );
+	__layout->addWidget( __filters );
+}
+
+
+
+/**
+ *
+ */
+
+void ActionFrame::runAction( Environment* environment )
+{
+	Environment::FileInfoList files = environment->files( );
+
+	__filters->applyFilters( files );
+	__action->run( files );
 }

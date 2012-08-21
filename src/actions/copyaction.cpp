@@ -50,26 +50,26 @@ CopyAction::CopyAction( QWidget* parent ) :
  *
  */
 
-void CopyAction::run( Execution::File& file )
+void CopyAction::run( Environment::FileInfo& file )
 {
 	QString path = file.compilePath( __destination->path( ));
 
-	switch ( file.execution( ).mode( )) {
-		case Execution::Explain:
-			file.addExplanation( QString( "Will be moved to '%s'" ).arg( path ));
+	switch ( file.environment( )->mode( )) {
+		case Environment::Explain:
+			file.addExplanation( QString( "Will be copied to '%s'" ).arg( path ));
 			break;
 
-		case Execution::Run:
+		case Environment::Run:
 			{
 				bool copied = QFile::copy(
-					file.info( ).canonicalFilePath( ),
-					QDir( path ).filePath( file.info( ).fileName( ))
+					file.canonicalFilePath( ),
+					QDir( path ).filePath( file.fileName( ))
 				);
 
 				if ( copied ) {
-					file.addExplanation( QString( "Has been moved to '%s'" ).arg( path ));
+					file.addExplanation( QString( "Has been copied to '%s'" ).arg( path ));
 				} else {
-					file.addError( QString( "Couldn't be moved to '%s'" ).arg( path ));
+					file.addError( QString( "Couldn't be copied to '%s'" ).arg( path ));
 				}
 			}
 			break;

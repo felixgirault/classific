@@ -47,11 +47,14 @@ ActionCollection::ActionCollection( QWidget* parent ) :
  *
  */
 
-void ActionCollection::runActions( Execution& execution )
+void ActionCollection::runActions( Environment* environment )
 {
-	foreach ( Action* action, __actions ) {
-
+	foreach ( ActionFrame* frame, __frames ) {
+		environment->refresh( );
+		frame->runAction( environment );
 	}
+
+	emit reportActions( environment );
 }
 
 
@@ -66,6 +69,7 @@ void ActionCollection::addFrame( Action* action, const QString& name )
 	connect( frame, SIGNAL( removeMe( )), this, SLOT( removeFrame( )));
 
 	__layout->insertWidget( __layout->count( ) - 2, frame );
+	__frames.append( frame );
 }
 
 
@@ -82,7 +86,6 @@ void ActionCollection::addAction( )
 	Action* action = Factory< Action >::create( selected );
 
 	if ( action ) {
-		__actions.append( action );
 		addFrame( action, selected );
 	}
 }
@@ -100,6 +103,8 @@ void ActionCollection::removeFrame( )
 		return;
 	}
 
-	layout( )->removeWidget( frame );
+	__layout->removeWidget( frame );
+	__frames.removeOne( frame );
+
 	frame->deleteLater( );
 }

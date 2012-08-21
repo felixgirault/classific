@@ -22,7 +22,10 @@
 
 #include <QFrame>
 
+#include "environment.h"
+
 class Action;
+class VBoxLayout;
 class TitleBar;
 class FilterCollection;
 
@@ -47,6 +50,14 @@ class ActionFrame : public QFrame
 
 		ActionFrame( Action* action, const QString& name, QWidget* parent = 0 );
 
+
+
+		/**
+		 *
+		 */
+
+		void runAction( Environment* environment );
+
 	signals:
 
 		/**
@@ -58,6 +69,8 @@ class ActionFrame : public QFrame
 	private:
 
 		Action* __action;			//!< Action.
+
+		VBoxLayout* __layout;		//!< Layout.
 		TitleBar* __titleBar;		//!< Title bar.
 		FilterCollection* __filters;	//!< Collection of filters.
 		

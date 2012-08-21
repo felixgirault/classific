@@ -21,11 +21,12 @@
 #define ACTIONCOLLECTION_H
 
 #include <QFrame>
-#include <QVector>
+#include <QList>
 
-#include "execution.h"
+#include "environment.h"
 
 class Action;
+class ActionFrame;
 class VBoxLayout;
 class TypedPushButton;
 
@@ -55,7 +56,15 @@ class ActionCollection : public QFrame
 		 *
 		 */
 
-		void runActions( Execution& execution );
+		void runActions( Environment* environment );
+
+	signals:
+
+		/**
+		 *
+		 */
+
+		void reportActions( Environment* environment );
 
 	private:
 
@@ -83,10 +92,10 @@ class ActionCollection : public QFrame
 
 	private:
 
-		QVector< Action* > __actions;	//!<
+		QList< ActionFrame* > __frames;	//!<
 
-		VBoxLayout* __layout;
-		TypedPushButton* __add;
+		VBoxLayout* __layout;	//!< Layout.
+		TypedPushButton* __add;	//!<
 
 };
 

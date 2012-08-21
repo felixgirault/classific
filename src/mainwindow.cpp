@@ -34,19 +34,22 @@
 
 MainWindow::MainWindow( QWidget* parent ) :
 	QMainWindow( parent ),
-	__layout( new VBoxLayout( )),
+	__layout( new HBoxLayout( )),
 	__actions( new ActionCollection( )),
 	__runner( new Runner( ))
 {
 	connect(
-		__runner, SIGNAL( run( Execution& )),
-		__actions, SLOT( runActions( Execution& ))
+		__runner, SIGNAL( run( Environment* )),
+		__actions, SLOT( runActions( Environment* ))
 	);
 
-	__layout->addWidget( __actions );
-	__layout->setAlignment( __actions, Qt::AlignHCenter );
+	connect(
+		__actions, SIGNAL( reportActions( Environment* )),
+		__runner, SLOT( report( Environment* ))
+	);
 
-	__layout->addWidget( __runner );
+	__layout->addWidget( __runner, 50 );
+	__layout->addWidget( __actions, 50 );
 
 	QWidget* centralWidget = new QWidget( );
 	centralWidget->setLayout( __layout );

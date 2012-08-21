@@ -22,6 +22,8 @@
 
 #include <QFrame>
 
+class HBoxLayout;
+class QProgressBar;
 class QLabel;
 class TypedPushButton;
 
@@ -41,7 +43,23 @@ class TitleBar : public QFrame
 		 *
 		 */
 
-		TitleBar( const QString& title, QWidget* parent = 0 );
+		TitleBar( const QString& title, bool hasProgress = false, QWidget* parent = 0 );
+
+
+
+		/**
+		 *
+		 */
+
+		void setMaximumProgress( int maximum );
+
+	public slots:
+
+		/**
+		 *
+		 */
+
+		void progress( );
 
 	signals:
 
@@ -69,6 +87,8 @@ class TitleBar : public QFrame
 
 	private:
 
+		HBoxLayout* __layout;
+		QProgressBar* __progress;
 		QLabel* __title;			//!< Title label.
 		TypedPushButton* __toggle;	//!< A button to request toggling.
 		TypedPushButton* __remove;	//!< A button to request closing.

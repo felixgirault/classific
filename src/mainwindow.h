@@ -22,7 +22,7 @@
 
 #include <QMainWindow>
 
-class VBoxLayout;
+class HBoxLayout;
 class ActionCollection;
 class Runner;
 
@@ -58,7 +58,7 @@ class MainWindow : public QMainWindow
 
 	private:
 
-		VBoxLayout* __layout;
+		HBoxLayout* __layout;
 		ActionCollection* __actions;
 		Runner* __runner;
 

@@ -27,12 +27,12 @@ SOURCES += main.cpp\
     titlebar.cpp \
     njeenapplication.cpp \
     picker.cpp \
-    execution.cpp \
     actions/extractaction.cpp \
     actions/executeaction.cpp \
     pathedit.cpp \
     statefullineedit.cpp \
-    runner.cpp
+    runner.cpp \
+    environment.cpp
 
 HEADERS  += mainwindow.h \
     action.h \
@@ -49,12 +49,12 @@ HEADERS  += mainwindow.h \
     filterframe.h \
     titlebar.h \
     njeenapplication.h \
-    execution.h \
     actions/extractaction.h \
     actions/executeaction.h \
     pathedit.h \
     statefullineedit.h \
-    runner.h
+    runner.h \
+    environment.h
 
 OTHER_FILES += \
     ../themes/Njeen/style.css

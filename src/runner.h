@@ -22,11 +22,13 @@
 
 #include <QFrame>
 
-#include "execution.h"
+#include "environment.h"
 
 class FormLayout;
 class PathEdit;
 class TypedPushButton;
+class QTableView;
+class QStringListModel;
 
 
 
@@ -46,13 +48,21 @@ class Runner : public QFrame
 
 		Runner( QWidget* parent = 0 );
 
+	public slots:
+
+		/**
+		 *
+		 */
+
+		void report( Environment* environment );
+
 	signals:
 
 		/**
 		 *
 		 */
 
-		void run( Execution& execution );
+		void run( Environment* environment );
 
 	private slots:
 
@@ -64,10 +74,12 @@ class Runner : public QFrame
 		
 	private:
 
-		FormLayout* __layout;		//!<
-		PathEdit* __path;			//!<
-		TypedPushButton* __explain;	//!<
-		TypedPushButton* __run;		//!<
+		FormLayout* __layout;			//!<
+		PathEdit* __path;				//!<
+		TypedPushButton* __explain;		//!<
+		TypedPushButton* __run;			//!<
+		QTableView* __outputView;		//!<
+		QStringListModel* __outputModel;	//!<
 		
 };
 

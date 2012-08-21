@@ -43,3 +43,14 @@ NameFilter::NameFilter( QWidget* parent ) :
 {
 	__layout->addRow( tr( "Name" ), __pattern );
 }
+
+
+
+/**
+ *
+ */
+
+bool NameFilter::passes( const Environment::FileInfo& file ) const
+{
+	return true;
+}

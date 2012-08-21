@@ -21,9 +21,12 @@
 #define FILTERCOLLECTION_H
 
 #include <QFrame>
-#include <QVector>
+#include <QList>
+
+#include "environment.h"
 
 class Filter;
+class FilterFrame;
 class VBoxLayout;
 class TypedPushButton;
 
@@ -46,6 +49,14 @@ class FilterCollection : public QFrame
 		 */
 
 		FilterCollection( QWidget* parent = 0 );
+
+
+
+		/**
+		 *
+		 */
+
+		void applyFilters( Environment::FileInfoList& files ) const;
 
 	private:
 
@@ -73,7 +84,7 @@ class FilterCollection : public QFrame
 
 	private:
 
-		QVector< Filter* > __filters;	//!<
+		QList< FilterFrame* > __frames;	//!<
 
 		VBoxLayout* __layout;
 		TypedPushButton* __add;

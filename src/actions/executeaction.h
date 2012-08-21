@@ -41,13 +41,13 @@ class ExecuteAction : public Action
 
 		ExecuteAction( QWidget* parent = 0 );
 
-
+	protected:
 
 		/**
 		 *	Executes the action.
 		 */
 
-		void run( Execution::File& file );
+		void run( Environment::FileInfo& file );
 
 };
 

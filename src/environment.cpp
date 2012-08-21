@@ -19,7 +19,7 @@
 
 #include <QFileInfoList>
 
-#include "execution.h"
+#include "environment.h"
 
 
 
@@ -27,8 +27,8 @@
  *
  */
 
-Execution::File::File( ) :
-	__execution( 0 )
+Environment::FileInfo::FileInfo( ) :
+	__environment( 0 )
 { }
 
 
@@ -37,9 +37,9 @@ Execution::File::File( ) :
  *
  */
 
-Execution::File::File( Execution* execution, const QFileInfo& info ) :
-	__execution( execution ),
-	__info( info )
+Environment::FileInfo::FileInfo( const QFileInfo& base, Environment* environment ) :
+	QFileInfo( base ),
+	__environment( environment )
 { }
 
 
@@ -48,9 +48,9 @@ Execution::File::File( Execution* execution, const QFileInfo& info ) :
  *
  */
 
-Execution& Execution::File::execution( ) const
+Environment* Environment::FileInfo::environment( ) const
 {
-	return *__execution;
+	return __environment;
 }
 
 
@@ -59,26 +59,15 @@ Execution& Execution::File::execution( ) const
  *
  */
 
-QFileInfo Execution::File::info( ) const
-{
-	return __info;
-}
-
-
-
-/**
- *
- */
-
-QString Execution::File::compilePath( const QString& path ) const
+QString Environment::FileInfo::compilePath( const QString& path ) const
 {
 	QString compiled = path;
 
 	// root directory
-	compiled.replace( "%ROOT%", __execution->directory( ).canonicalPath( ));
+	compiled.replace( "%ROOT%", __environment->directory( ).canonicalPath( ));
 
 	// current directory
-	compiled.replace( "%DIR", __info.canonicalPath( ));
+	compiled.replace( "%DIR", canonicalPath( ));
 
 	return compiled;
 }
@@ -89,7 +78,7 @@ QString Execution::File::compilePath( const QString& path ) const
  *
  */
 
-QStringList Execution::File::explanations( ) const
+QStringList Environment::FileInfo::explanations( ) const
 {
 	return __explanations;
 }
@@ -100,7 +89,7 @@ QStringList Execution::File::explanations( ) const
  *
  */
 
-void Execution::File::addExplanation( const QString& explanation )
+void Environment::FileInfo::addExplanation( const QString& explanation )
 {
 	__explanations.append( explanation );
 }
@@ -111,7 +100,7 @@ void Execution::File::addExplanation( const QString& explanation )
  *
  */
 
-QStringList Execution::File::errors( ) const
+QStringList Environment::FileInfo::errors( ) const
 {
 	return __errors;
 }
@@ -122,7 +111,7 @@ QStringList Execution::File::errors( ) const
  *
  */
 
-void Execution::File::addError( const QString& error )
+void Environment::FileInfo::addError( const QString& error )
 {
 	__errors.append( error );
 }
@@ -133,13 +122,12 @@ void Execution::File::addError( const QString& error )
  *
  */
 
-Execution::Execution( Mode mode, const QDir& directory, bool recursive ) :
+Environment::Environment( ExecutionMode mode, const QDir& directory, bool recursive, QObject* parent ) :
+	QObject( parent ),
 	__mode( mode ),
 	__directory( directory ),
 	__recursive( recursive )
-{
-	scan( __directory );
-}
+{ }
 
 
 
@@ -147,7 +135,7 @@ Execution::Execution( Mode mode, const QDir& directory, bool recursive ) :
  *
  */
 
-Execution::Mode Execution::mode( ) const
+Environment::ExecutionMode Environment::mode( ) const
 {
 	return __mode;
 }
@@ -160,7 +148,7 @@ Execution::Mode Execution::mode( ) const
  *	@return
  */
 
-QDir Execution::directory( ) const
+QDir Environment::directory( ) const
 {
 	return __directory;
 }
@@ -168,12 +156,10 @@ QDir Execution::directory( ) const
 
 
 /**
- *	Returns if the search is recursive.
  *
- *	@return
  */
 
-bool Execution::recursive( ) const
+bool Environment::recursive( ) const
 {
 	return __recursive;
 }
@@ -184,7 +170,29 @@ bool Execution::recursive( ) const
  *
  */
 
-void Execution::scan( const QDir& directory )
+Environment::FileInfoList Environment::files( ) const
+{
+	return __files;
+}
+
+
+
+/**
+ *
+ */
+
+void Environment::refresh( )
+{
+	scan( __directory );
+}
+
+
+
+/**
+ *
+ */
+
+void Environment::scan( const QDir& directory )
 {
 	QFileInfoList files = directory.entryInfoList(
 		QStringList( ),
@@ -197,7 +205,7 @@ void Execution::scan( const QDir& directory )
 		}
 
 		if ( file.isFile( )) {
-			__files.append( File( this, file ));
+			__files.append( FileInfo( file, this ));
 		}
 	}
 }

@@ -22,6 +22,8 @@
 
 #include <QFrame>
 
+#include "environment.h"
+
 
 
 /**
@@ -41,6 +43,14 @@ class Filter : public QFrame
 		 */
 
 		Filter( QWidget* parent = 0 );
+
+
+
+		/**
+		 *
+		 */
+
+		virtual bool passes( const Environment::FileInfo& file ) const = 0;
 
 	private:
 

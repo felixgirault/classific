@@ -20,7 +20,7 @@
 #include "njeenapplication.h"
 #include "mainwindow.h"
 
-#include "execution.h"
+
 
 /**
  *	Entry point of the application.

@@ -44,13 +44,13 @@ class ExtractAction : public Action
 
 		ExtractAction( QWidget* parent = 0 );
 
-
+	protected:
 
 		/**
 		 *	Executes the action.
 		 */
 
-		void run( Execution::File& file );
+		void run( Environment::FileInfo& file );
 
 	private:
 

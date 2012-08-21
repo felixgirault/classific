@@ -20,6 +20,7 @@
 #define NAMEFILTER_H
 
 #include "../filter.h"
+#include "environment.h"
 
 class FormLayout;
 class QLineEdit;
@@ -41,6 +42,14 @@ class NameFilter : public Filter
 		 */
 
 		NameFilter( QWidget* parent = 0 );
+
+
+
+		/**
+		 *
+		 */
+
+		bool passes( const Environment::FileInfo& file ) const;
 
 	private:
 

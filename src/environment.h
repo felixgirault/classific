@@ -17,13 +17,14 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
-#ifndef EXECUTION_H
-#define EXECUTION_H
+#ifndef ENVIRONMENT_H
+#define ENVIRONMENT_H
 
+#include <QObject>
 #include <QDir>
 #include <QFileInfo>
 #include <QStringList>
-#include <QVector>
+#include <QList>
 
 
 
@@ -31,7 +32,7 @@
  *
  */
 
-class Execution
+class Environment : public QObject
 {
 	public:
 
@@ -39,7 +40,7 @@ class Execution
 		 *
 		 */
 
-		enum Mode {
+		enum ExecutionMode {
 			Explain,
 			Run
 		};
@@ -50,7 +51,7 @@ class Execution
 		 *
 		 */
 
-		class File
+		class FileInfo : public QFileInfo
 		{
 			public:
 
@@ -58,24 +59,16 @@ class Execution
 				 *
 				 */
 
-				File( );
+				FileInfo( );
 
 
 
 				/**
-				 *	@param execution
-				 *	@param info
+				 *	@param base
+				 *	@param environment
 				 */
 
-				File( Execution* execution, const QFileInfo& info );
-
-
-
-				/**
-				 *
-				 */
-
-				Execution& execution( ) const;
+				FileInfo( const QFileInfo& base, Environment* environment );
 
 
 
@@ -83,7 +76,7 @@ class Execution
 				 *
 				 */
 
-				QFileInfo info( ) const;
+				Environment* environment( ) const;
 
 
 
@@ -127,13 +120,20 @@ class Execution
 
 			private:
 
-				Execution* __execution;
-				QFileInfo __info;
+				Environment* __environment;	//!<
 
-				QStringList __explanations;
-				QStringList __errors;
+				QStringList __explanations;	//!<
+				QStringList __errors;		//!<
 
 		};
+
+
+
+		/**
+		 *
+		 */
+
+		typedef QList< FileInfo > FileInfoList;
 
 	public:
 
@@ -145,7 +145,7 @@ class Execution
 		 *	@param recursive Tells if the search is recursive.
 		 */
 
-		Execution( Mode mode, const QDir& directory, bool recursive = false );
+		Environment( ExecutionMode mode, const QDir& directory, bool recursive = false, QObject* parent = 0 );
 
 
 
@@ -153,7 +153,7 @@ class Execution
 		 *
 		 */
 
-		Mode mode( ) const;
+		ExecutionMode mode( ) const;
 
 
 
@@ -175,6 +175,22 @@ class Execution
 
 		bool recursive( ) const;
 
+
+
+		/**
+		 *
+		 */
+
+		FileInfoList files( ) const;
+
+
+
+		/**
+		 *
+		 */
+
+		void refresh( );
+
 	private:
 
 		/**
@@ -185,12 +201,12 @@ class Execution
 
 	private:
 
-		Mode __mode;			//!<
+		ExecutionMode __mode;	//!< Execution mode.
 		QDir __directory;		//!< Root directory.
-		bool __recursive;		//!<
+		bool __recursive;		//!< Whether the search is recursive or not.
 
-		QVector< File > __files;	//!<
+		FileInfoList __files;	//!< Found files.
 
 };
 
-#endif // EXECUTION_H
+#endif // ENVIRONMENT_H

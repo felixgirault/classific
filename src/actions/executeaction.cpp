@@ -46,14 +46,14 @@ ExecuteAction::ExecuteAction( QWidget* parent ) :
  *
  */
 
-void ExecuteAction::run( Execution::File& file )
+void ExecuteAction::run( Environment::FileInfo& file )
 {
-	switch ( file.execution( ).mode( )) {
-		case Execution::Explain:
+	switch ( file.environment( )->mode( )) {
+		case Environment::Explain:
 
 			break;
 
-		case Execution::Run:
+		case Environment::Run:
 
 			break;
 	}

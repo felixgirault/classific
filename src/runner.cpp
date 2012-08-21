@@ -17,6 +17,9 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QTableWidget>
+#include <QStringListModel>
+
 #include "runner.h"
 #include "layouts.h"
 #include "pathedit.h"
@@ -33,14 +36,39 @@ Runner::Runner( QWidget* parent ) :
 	__layout( new FormLayout( this )),
 	__path( new PathEdit( )),
 	__explain( new TypedPushButton( tr( "Explain" ), TypedPushButton::Neutral )),
-	__run( new TypedPushButton( tr( "Run" ), TypedPushButton::Neutral ))
+	__run( new TypedPushButton( tr( "Run" ), TypedPushButton::Neutral )),
+	__outputView( new QTableView( )),
+	__outputModel( new QStringListModel( ))
 {
+	__outputView->setModel( __outputModel );
+
+	connect( __explain, SIGNAL( clicked( )), this, SLOT( run( )));
+	connect( __run, SIGNAL( clicked( )), this, SLOT( run( )));
+
 	HBoxLayout* buttonsLayout = new HBoxLayout( );
 	buttonsLayout->addWidget( __explain );
 	buttonsLayout->addWidget( __run );
 
 	__layout->addRow( tr( "Working directory" ), __path );
 	__layout->addRow( tr( "Execution" ), buttonsLayout );
+	__layout->addRow( tr( "Output" ), __outputView );
+}
+
+
+
+/**
+ *
+ */
+
+void Runner::report( Environment* environment )
+{
+	QStringList fileNames;
+
+	foreach ( Environment::FileInfo file, environment->files( )) {
+		fileNames.append( file.fileName( ));
+	}
+
+	__outputModel->setStringList( fileNames );
 }
 
 
@@ -52,16 +80,16 @@ Runner::Runner( QWidget* parent ) :
 void Runner::run( )
 {
 	TypedPushButton* button = qobject_cast< TypedPushButton* >( sender( ));
-	Execution::Mode mode;
+	Environment::ExecutionMode mode;
 
 	if ( button == __explain ) {
-		mode = Execution::Explain;
-	} else if ( button == __run ) {
-		mode = Execution::Run;
+		mode = Environment::Explain;
+	/*} else if ( button == __run ) {
+		mode = Environment::Run;*/
 	} else {
 		return;
 	}
 
-	Execution* execution = new Execution( mode, __path->dir( ), false );
-	emit run( *execution );
+	Environment* environment = new Environment( mode, __path->dir( ), false );
+	emit run( environment );
 }

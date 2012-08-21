@@ -46,12 +46,31 @@ FilterCollection::FilterCollection( QWidget* parent ) :
  *
  */
 
+void FilterCollection::applyFilters( Environment::FileInfoList& files ) const
+{
+	foreach ( Environment::FileInfo file, files ) {
+		foreach ( FilterFrame* frame, __frames ) {
+			if ( !frame->passesFilter( file )) {
+				files.removeOne( file );
+				break;
+			}
+		}
+	}
+}
+
+
+
+/**
+ *
+ */
+
 void FilterCollection::addFrame( Filter* filter, const QString& name )
 {
 	FilterFrame* frame = new FilterFrame( filter, name );
 	connect( frame, SIGNAL( removeMe( )), this, SLOT( removeFrame( )));
 
 	__layout->insertWidget( __layout->count( ) - 1, frame );
+	__frames.append( frame );
 }
 
 
@@ -84,6 +103,8 @@ void FilterCollection::removeFrame( )
 		return;
 	}
 
-	layout( )->removeWidget( frame );
+	__layout->removeWidget( frame );
+	__frames.removeOne( frame );
+
 	frame->deleteLater( );
 }

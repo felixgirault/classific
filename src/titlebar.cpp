@@ -17,6 +17,7 @@
  *	with this program. If not, see <http://www.gnu.org/licenses/>.
  */
 
+#include <QProgressBar>
 #include <QLabel>
 
 #include "titlebar.h"
@@ -29,9 +30,11 @@
  *
  */
 
-TitleBar::TitleBar( const QString& title, QWidget* parent ) :
+TitleBar::TitleBar( const QString& title, bool hasProgress, QWidget* parent ) :
 	QFrame( parent ),
-	__title( new QLabel( title, this )),
+	__layout( new HBoxLayout( this )),
+	__progress( 0 ),
+	__title( new QLabel( title )),
 	__toggle( new TypedPushButton( tr( "-" ), TypedPushButton::Neutral )),
 	__remove( new TypedPushButton( tr( "x" ), TypedPushButton::Negative ))
 {
@@ -39,12 +42,47 @@ TitleBar::TitleBar( const QString& title, QWidget* parent ) :
 	connect( __toggle, SIGNAL( toggled( bool )), this, SLOT( toggle( bool )));
 	connect( __remove, SIGNAL( clicked( )), this, SIGNAL( remove( )));
 
+	if ( hasProgress ) {
+		__progress = new QProgressBar( );
+		__progress->setTextVisible( false );
+		__progress->setRange( 0, 0 );
+
+		__title->setParent( __progress );
+		__layout->addWidget( __progress, 100 );
+	} else {
+		__layout->addWidget( __title, 100 );
+	}
+
 	__toggle->setCheckable( true );
 
-	HBoxLayout* layout = new HBoxLayout( this );
-	layout->addWidget( __title, 100 );
-	layout->addWidget( __toggle );
-	layout->addWidget( __remove );
+	__layout->addWidget( __toggle );
+	__layout->addWidget( __remove );
+}
+
+
+
+/**
+ *
+ */
+
+void TitleBar::setMaximumProgress( int maximum )
+{
+	if ( __progress ) {
+		__progress->setMaximum( maximum );
+	}
+}
+
+
+
+/**
+ *
+ */
+
+void TitleBar::progress( )
+{
+	if ( __progress ) {
+		__progress->setValue( __progress->value( ) + 1 );
+	}
 }
 
 

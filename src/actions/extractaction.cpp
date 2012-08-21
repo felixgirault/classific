@@ -56,16 +56,16 @@ ExtractAction::ExtractAction( QWidget* parent ) :
  *
  */
 
-void ExtractAction::run( Execution::File& file )
+void ExtractAction::run( Environment::FileInfo& file )
 {
 	QString path = file.compilePath( __destination->path( ));
 
-	switch ( file.execution( ).mode( )) {
-		case Execution::Explain:
+	switch ( file.environment( )->mode( )) {
+		case Environment::Explain:
 			file.addExplanation( QString( "Will be extracted to '%s'" ).arg( path ));
 			break;
 
-		case Execution::Run:
+		case Environment::Run:
 			{
 				bool extracted = true;
 

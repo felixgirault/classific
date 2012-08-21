@@ -23,7 +23,7 @@
 #include <QFrame>
 #include <QFileInfo>
 
-#include "execution.h"
+#include "environment.h"
 
 class QLabel;
 class QProgressBar;
@@ -55,7 +55,23 @@ class Action : public QFrame
 		 *	Executes the action.
 		 */
 
-		virtual void run( Execution::File& file ) = 0;
+		void run( Environment::FileInfoList& files );
+
+	signals:
+
+		/**
+		 *
+		 */
+
+		void fileProcessed( );
+
+	protected:
+
+		/**
+		 *	Executes the action.
+		 */
+
+		virtual void run( Environment::FileInfo& file ) = 0;
 
 	private:
 

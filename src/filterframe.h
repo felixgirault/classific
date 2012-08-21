@@ -23,6 +23,8 @@
 #include <QFrame>
 #include <QWidget>
 
+#include "environment.h"
+
 class Filter;
 class VBoxLayout;
 class TitleBar;
@@ -47,6 +49,14 @@ class FilterFrame : public QFrame
 		 */
 
 		FilterFrame( Filter* filter, const QString& name, QWidget* parent = 0 );
+
+
+
+		/**
+		 *
+		 */
+
+		bool passesFilter( const Environment::FileInfo& file ) const;
 
 	signals:
 

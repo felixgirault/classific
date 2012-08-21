@@ -42,3 +42,14 @@ FilterFrame::FilterFrame( Filter* filter, const QString& name, QWidget* parent )
 	__layout->addWidget( __titleBar );
 	__layout->addWidget( __filter );
 }
+
+
+
+/**
+ *
+ */
+
+bool FilterFrame::passesFilter( const Environment::FileInfo& file ) const
+{
+	return __filter->passes( file );
+}

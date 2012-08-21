@@ -31,6 +31,18 @@
 
 Action::Action( QWidget* parent ) :
 	QFrame( parent )
-{
+{ }
 
+
+
+/**
+ *	Executes the action.
+ */
+
+void Action::run( Environment::FileInfoList& files )
+{
+	foreach ( Environment::FileInfo file, files ) {
+		run( file );
+		emit fileProcessed( );
+	}
 }
